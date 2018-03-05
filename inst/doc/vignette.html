@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="Jindra Lacko" />
+
+<meta name="date" content="2018-03-02" />
+
+<title>Examples of using RCzechia</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+
+
+<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%20code%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Examples of using RCzechia</h1>
+<h4 class="author"><em>Jindra Lacko</em></h4>
+<h4 class="date"><em>2018-03-02</em></h4>
+
+
+
+<div id="geocoding-locations-drawing-them-on-a-map" class="section level2">
+<h2>Geocoding locations &amp; drawing them on a map</h2>
+<p>Drawing a map: three semi-random landmarks on map, with rivers shown for better orientation.</p>
+<p>To get the geocoded data frame you can consider using <code>geocode()</code> function from <code>ggmap</code> package, which implies consent with Google terms of use.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(RCzechia)
+<span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(tmap)
+<span class="kw">library</span>(sf)
+
+rivers &lt;-<span class="st"> </span><span class="kw">reky</span>()
+
+rivers &lt;-<span class="st"> </span>rivers[rivers<span class="op">$</span>Major <span class="op">==</span><span class="st"> </span>T, ]
+
+mista &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">misto =</span> <span class="kw">c</span>(<span class="st">'kramarova vila'</span>, <span class="st">'arcibiskupske zahrady v kromerizi'</span>, <span class="st">'becov nad teplou'</span>),
+                    <span class="dt">lon =</span> <span class="kw">c</span>(<span class="fl">14.41030</span>, <span class="fl">17.39353</span>, <span class="fl">12.83833</span>),
+                    <span class="dt">lat =</span> <span class="kw">c</span>(<span class="fl">50.09380</span>, <span class="fl">49.30048</span>, <span class="fl">50.08346</span>))
+
+<span class="co"># to geocode a list of locations consider ggmap::geocode()</span>
+
+POI &lt;-<span class="st"> </span>mista <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># or geocode using ggmap</span>
+<span class="st">  </span><span class="kw">st_as_sf</span>(<span class="dt">coords =</span> <span class="kw">c</span>(<span class="st">&quot;lon&quot;</span>, <span class="st">&quot;lat&quot;</span>), <span class="dt">crs =</span> <span class="dv">4326</span>) <span class="co"># convert plain data to spatial CRS = WGS84, used by Google</span>
+
+tm_plot &lt;-<span class="st"> </span><span class="kw">tm_shape</span>(<span class="kw">republika</span>()) <span class="op">+</span><span class="st"> </span><span class="kw">tm_borders</span>(<span class="st">&quot;grey30&quot;</span>, <span class="dt">lwd =</span> <span class="dv">1</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">tm_shape</span>(POI) <span class="op">+</span><span class="st"> </span><span class="kw">tm_symbols</span>(<span class="dt">col =</span> <span class="st">&quot;firebrick3&quot;</span>, <span class="dt">shape =</span> <span class="dv">20</span>, <span class="dt">size =</span> <span class="fl">0.5</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">tm_shape</span>(rivers) <span class="op">+</span><span class="st"> </span><span class="kw">tm_lines</span>(<span class="dt">col =</span> <span class="st">'steelblue'</span>, <span class="dt">lwd =</span> <span class="fl">1.5</span>)
+  
+
+<span class="kw">print</span>(tm_plot)</code></pre></div>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASAAAAEgCAMAAAAjXV6yAAAAD1BMVEUAAABGgrRNTU3NJib////mSXRrAAAACXBIWXMAAA7DAAAOwwHHb6hkAAALuElEQVR4nO2d6bqkKgxFW8v3f+bbVQ5MCTsEsKzbe/84nyUScBlm9PzZqKr+fDsDTxcBAREQEAEBERAQAQEREBABAREQEAEBERAQAQEREBABAREQEAEBERAQAQEREBABAREQEAEBERAQAQEREBABAREQEAEBERAQAQEREBABAREQEAEBERAQAQEREBABAREQEAEBERAQAQEREBABAREQEAEBERAQAQEREBABAREQEAEBERAQAQEREBABAREQEAEBERAQAQEREBABAREQ0A7oDyUoBvS1B/RgERDQXYDWdaLxmboJ0PrR9oOgbgO0HZTU0IfqXkA7pCJsXVV2X9ddgKLDnMS6ny0DHqEb66DwIw8L1zwP0W3N/Coe7r9Vdg/QfYDW4Cl5kHj4EN3YUbwA5YjW4pIH6c6edFTXJKcJqGikNA/6Z4vYknpNOP6cJqBF6vlsoYsYhTyukM0H9Peel/KUOi57GqHZgHYUOaH9vIzi3wEUik/JRxyUnQGPYjQNUFL9SoQqEZ9UE80ClNzj0gjo/Wd5CKV5gKIfLXyuOMszmrRJgFIHcpl4u93ev/wqp7GA1qDorA/QJ95R3roz5tdAQB8s6zn9FckJ6Ir2PwGk30ZTHR1FM5ier5EeJJ5dFi+fKNoXm/7JHvT3Lr010JYA2vYHEFZH7sI1AtBR7wghTueRI6/ntPWnB/pzgORH2gMoj3wNcYV2YJ4GAKquanW5UJFO+rPDtF2dgM6GXcltVxEDgG4i1A2oms0uPjD2LYT6AKGpiT5AwAF/wYNQFjsBbdU+1C/UQTCPS/0esfTYz66k11A/V7Xs8uVtt6Bm4dmAGnqzS1djJke9ryvtA9SUu6WnLhLZ3jkucwJqSWIH5B6zCqnfOW5tAnQ5djsg96i15FrBM4FcA6AwIdZWwnZA/m51MWhVU58xyrcBiqrk1kws4e8gQhVA2/jqGwMqZpmN6S9LOVvmnp2OI+oEomfoTKiUAZAat9LD0fo/QwgZ9hOPYwQBqfMYQWn+91MyO3+HKC9lGiHxsEcIkPYklnCQIAI950GANu3+x+9WA4Agn+iUZVjhrqeLM9rWB3hFo0pASX2sli/hHFjB6BmWSdHkZ5ftxsonIduZCR4UDUI1e47bPNgM605v8uMrph3TH+2EJEDXLNjIiebDCXwupEQybFFb01ppBKD12pGqWnMB8sfVCyZqyZLdAtl+UaMEQIfhirUuQO0+pEeQC1n2K6mWWtNWPEh1R39Fu/gJ1aZdizyCinhEHXSt7wqXd0x9JX1Jb8xCRY1zD6BVATRq8nQcoPiOF1gFO9p5uaO45qMZUy8QqOJCoHdZC4waqXy/enmto+uoAFoza73rN1tW9yy5qhFrZkOnFjw+5/hVBxSrz3VqVg44tQTQfZ8HII/OgYdaxII6S1Zk6PXSw2pjlKrVc7MHBOQjVAe0D9NDDl+VW4R6LbXoOgb0fI7dVfAp+sqYVsTOgUGyqPV6dRD6G/WvuQqh5oBTe9uO/dxFSJnuOGe9kmtfrx5CH0A1F1IDLLe+nXkGFyJLhbT5oM8jyZLrBzSnjMWXgvBR/SDZHfsAbR9AlXB1frshDexr4cgGqzKjqBCyWJXLBYicTNoa+0iKDV3xZKCJUBWQRMhgUxvTotznsRzjfhwjni21EKrOSXvXTpTVeJj77v6WwcC1SXYEICcibWZjUH+zlrLlomiqy7BMjAA56v0YS3I4HZAxhXSZGNyge+FQVlH1RN4034NcCQBEIwHJi82hcTIb8sqZxLvPpxY10+YFWzpl1/s4fbRO8wF5q7nPC7JrMcfzkWX7iw1QpSe8Z/wGF+p7NU2ssg2ArHs121vx8cj61iW9gNpSqVwRl7MRk7ieTAA5AJmrIHzFsl1bY0LdbbNuVMea767ibiEg8x3YPOj4G3WPjOZHZaKMksRpB7RGxaCavCFv0iXfB5T8ai5ib6LLud3QP7WuXzO2jDmsZYBaPSidq4u9KR1RmDKmbMsbiah75b8RUNHuXZVr0igZsyVeNbgH2Wosv74NkNCCSTsSO+vxsS7UeX1+ywCQZDGvi6xlRL9uZIeomohwtjjTBkjsA+VGTXcHqvhxiCpT22UaQqJNgEy9aGWQWlxlmXFFCZmyU9minfu+cGE23jC1YvUMHbkCV3U72dkLx3ak1OJ5KZSlhJBhPgggMjVk5mpcv/Dohft6FHGXBCcVe1HnYDV6pPWHXwnMrtSm3ZYzEXNJi3/lx5DzCECpy48BtF9blhDH8C1ZQcrPQxv9gIrZZzWt9haqvmLk6Hbl/RJs4ixj7gmzssVU0/I04FmFvBQuYLHhCAmyAzoIIYfRe2iG3EjRkuqo14Xa1QBoW/PsiokPBnRElhrJfhcyqBXQnrFaTalluxPQOQ9pSWpkykfNYgN07d+qzpTOALTJLbKt2u9LuQnQtQWwNteuZHrKco+tL9STQosHmfZIbhqKnwJ07my4+tLDAFVGAVMAzSli8atTu6yAbGNWOeR7gFpTPm8zut1RgKpzPZa8Nco4IGu0KtymEVDXx7hmAJpSCUluYAZkm/SQw75XSzelLN6jFRBAVJ/pmuFDE8qYeIN2QIBQJeh7gBo8SNut2AAIzJypIeaJ0jYNbuf9O8ywjXpWbPNTDhls3gxoUz/BX1/RARd4ZXMh69537eE3ATq3X+fGwGrEfgk03ixbLWQjpJaONkDImsTqnAewGjfLYnF/BQsRqm0ndwGqfLSiqJCXEDJYFovoHawNvtQyGtDnz5KfSQ6GyUDotb/GV7mi81WEJrNhOL9c00a2ZSGnbC70qi8RAgNOQOLGmPTHklVIX2rp3wVMvwzPUngBlc2iZXNCSwIm9Q44ZgJyfHvgeYQmAsptz58k7jCpA4JR/YCyj3t8DVCX604FlH/AwhDjW5OL3/EgD6DGFGzyAzK8ZtEFKCljlhhTPKgHEDbeAygZ29+wGOw22lHC+gB90mh7p9WTRLc66uh+QN7v8ozT1Dp6AKC21359SdSNwkQ7HGgEoAZC31sAEnUXIPtXeb5RR1eGGb8CqPfz6nVCUmi2QaGmMYD6CNlz22K1FtiQ2AMAHd/9XPdj19dUmpO02x4CaP8Wj+XeKrk9ty05vqZSDXwEoA18gPpSDZDXizxVkN36IECbDVDtcabfDl/PCIbXqGrp9TrQMEBHyvWk5XsV41xDPLzzobLqLYS1FuKxgMCz0Vp58WTY3u/t6PSWro9GA6r820ytsCh5fn+dVXpNsDDasit53HcUvao4sGNEdLRstUKk2V6lz287+hCjAW3HDQtP1QNo551t8xdMFkFvqNmzGvmx2y4d2RgB6Ip6vLChv6O25BFCVq7eA05H0ARAyutTWk1iy3i0qh2d1Oxfx9eXt9xjmRmANsmFuiZlti18cDx+4yj/8H4IuKId7mNLRNBMQNlivXCdrft9XBt1ja6D9IOaMzZKzAG0Hh+NCafkNne/P7PVzNYarJwhR/jTAW1XPRROaJ2Shsohc6Lov0RkgFoyijQL0Jb7kPBU2yuG612cJf4wVmjA937l0FWEaYAOQuF3Aahnjixrlc7//7qICXVpHqD4PcW3chcavFy0O9Yy2oFmAnpnOumpZGGjUzvSGLwwMBXQtsb/TyYDNDyxPY3RK0uzAcXdljRoeGJ7GqNXliYXsfffT5O8+37ypesZ+jlA58j+GGZG3ySeBGj42u38IvbWOXG6hiW7SVsehpudCyhdwgwFrHOh8E5NBnSoeEnoZ/jcBKhrRua7ugvQtEpntu4D9KMiIKAEECUoAkSpIiAgAgIiICACAiIgIAICIiAgAgIiICACAiIgIAICIiAgAgIiICACAiIgIAICIiAgAgIiICACAiIgIAICIiAgAgIiICACAiIgIAICIiAgAgIiICACAiIgIAICIiAgAgIiICACAiIgIAICIiAgAgIiICACAiIgIAICIiAgAgIiICACAiIgIAICIiAgAgIiICACAiIgIAICIiAgAgIiIKD/AHRQ6arKj85HAAAAAElFTkSuQmCC" /><!-- --></p>
+</div>
+<div id="unemployment-in-czech-republic---a-chloropleth" class="section level2">
+<h2>Unemployment in Czech Republic - a chloropleth</h2>
+<p>A visualization problem: unemployment in the Czech Republic is in general low, but not uniformly low.<br />
+What are the hotspots?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(RCzechia)
+<span class="kw">library</span>(tmap)
+<span class="kw">library</span>(sf)
+
+src &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="kw">url</span>(<span class="st">&quot;https://raw.githubusercontent.com/jlacko/RCzechia/master/data-raw/unempl.csv&quot;</span>), <span class="dt">stringsAsFactors =</span> F) 
+<span class="co"># open data on unemployment from Czech Statistical Office - https://www.czso.cz/csu/czso/otevrena_data</span>
+<span class="co"># lightly edited for size (rows filtered)</span>
+
+src &lt;-<span class="st"> </span>src <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">KOD_OBEC =</span> <span class="kw">as.character</span>(uzemi_kod))  <span class="co"># keys in RCzechia are of type character</span>
+
+podklad &lt;-<span class="st"> </span><span class="kw">obce_polygony</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># obce_polygony = municipalities in RCzechia package</span>
+<span class="st">  </span><span class="kw">inner_join</span>(src, <span class="dt">by =</span> <span class="st">&quot;KOD_OBEC&quot;</span>) <span class="co"># linking by key</span>
+
+
+vystup &lt;-<span class="st"> </span><span class="kw">tm_shape</span>(<span class="kw">republika</span>()) <span class="op">+</span><span class="st"> </span><span class="kw">tm_borders</span>(<span class="dt">col =</span> <span class="st">&quot;grey40&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">tm_shape</span>(podklad) <span class="op">+</span><span class="st"> </span><span class="kw">tm_fill</span>(<span class="dt">col =</span> <span class="st">&quot;hodnota&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Unemployment&quot;</span>, <span class="dt">palette =</span> <span class="st">&quot;YlOrRd&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">tm_legend</span>(<span class="dt">position =</span> <span class="kw">c</span>(<span class="st">&quot;RIGHT&quot;</span>, <span class="st">&quot;top&quot;</span>),
+            <span class="dt">legend.format =</span> <span class="kw">list</span>(<span class="dt">fun =</span> <span class="cf">function</span>(x) <span class="kw">paste0</span>(<span class="kw">formatC</span>(x, <span class="dt">digits =</span> <span class="dv">0</span>, <span class="dt">format =</span> <span class="st">&quot;f&quot;</span>), <span class="st">&quot; %&quot;</span>)))
+
+<span class="kw">print</span>(vystup)</code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+</div>
+<div id="distnance-between-prague-to-brno" class="section level2">
+<h2>Distnance between Prague to Brno</h2>
+<p>Calculate distance between two spatial objects; the <code>sf</code> package supports (via gdal) point to point, point to polygon and polygon to polygon distances.</p>
+<p>Calculating distance from Prague (#1 Czech city) to Brno (#2 Czech city).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(RCzechia)
+<span class="kw">library</span>(sf)
+<span class="kw">library</span>(units)
+
+obce &lt;-<span class="st"> </span><span class="kw">obce_polygony</span>()
+
+praha &lt;-<span class="st"> </span>obce[obce<span class="op">$</span>NAZ_OBEC <span class="op">==</span><span class="st"> &quot;Praha&quot;</span>, ]
+brno &lt;-<span class="st"> </span>obce[obce<span class="op">$</span>NAZ_OBEC <span class="op">==</span><span class="st"> &quot;Brno&quot;</span>, ]
+
+vzdalenost &lt;-<span class="st"> </span><span class="kw">st_distance</span>(praha, brno) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">set_units</span>(<span class="st">&quot;kilometers&quot;</span>) <span class="co"># easier to interpret than meters, miles or decimal degrees..</span>
+
+<span class="kw">print</span>(vzdalenost)
+<span class="co">#&gt; Units: kilometers</span>
+<span class="co">#&gt;          [,1]</span>
+<span class="co">#&gt; [1,] 152.8073</span></code></pre></div>
+</div>
+<div id="interactive-map" class="section level2">
+<h2>Interactive Map</h2>
+<p>Interactive maps are powerful tools for data vizualization. They are easy to produce with the <code>tmap</code> package.</p>
+<p>I found the stamen toner a good company for interactive chloropleths - it gives enough context without distracting from the story of your data.</p>
+<p>A map of the whole Czech Republic in original resolution (the accuracy is about 1 meter) would be rather sizeable, and I found it better policy to either<br />
+* limit it to a single region (say a NUTS3) or<br />
+* to limit the size by applying <code>st_simplify()</code> to the shapefile. Note that RCzechia uses EPSG:4326 projection, with decimal degrees as unit. To simplify to given tolerance in meters you need to first <code>st_transform()</code> it to a different projection, e.g. EPSG:5513 (ing. Křovák).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(RCzechia)
+<span class="kw">library</span>(tmap)
+<span class="kw">library</span>(sf)
+
+src &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="kw">url</span>(<span class="st">&quot;https://raw.githubusercontent.com/jlacko/RCzechia/master/data-raw/unempl.csv&quot;</span>), <span class="dt">stringsAsFactors =</span> F) 
+<span class="co"># open data on unemployment from Czech Statistical Office - https://www.czso.cz/csu/czso/otevrena_data</span>
+<span class="co"># lightly edited for size (rows filtered)</span>
+
+
+src &lt;-<span class="st"> </span>src <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">KOD_OBEC =</span> <span class="kw">as.character</span>(uzemi_kod))  <span class="co"># keys in RCzechia are of type character</span>
+
+podklad &lt;-<span class="st"> </span><span class="kw">obce_polygony</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># obce_polygony = municipalities in RCzechia package</span>
+<span class="st">  </span><span class="kw">inner_join</span>(src, <span class="dt">by =</span> <span class="st">&quot;KOD_OBEC&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># linking by key</span>
+<span class="st">  </span><span class="kw">filter</span>(KOD_CZNUTS3 <span class="op">==</span><span class="st"> &quot;CZ071&quot;</span>) <span class="co"># Olomoucký kraj</span>
+
+vystup &lt;-<span class="st"> </span><span class="kw">tm_shape</span>(<span class="kw">republika</span>()) <span class="op">+</span><span class="st"> </span><span class="kw">tm_borders</span>(<span class="dt">col =</span> <span class="st">&quot;grey40&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">tm_shape</span>(podklad) <span class="op">+</span><span class="st"> </span><span class="kw">tm_fill</span>(<span class="dt">col =</span> <span class="st">&quot;hodnota&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Unemployment&quot;</span>, <span class="dt">palette =</span> <span class="st">&quot;YlOrRd&quot;</span>, <span class="dt">id =</span> <span class="st">&quot;NAZ_OBEC&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">tm_legend</span>(<span class="dt">position =</span> <span class="kw">c</span>(<span class="st">&quot;RIGHT&quot;</span>, <span class="st">&quot;top&quot;</span>),
+            <span class="dt">legend.format =</span> <span class="kw">list</span>(<span class="dt">fun =</span> <span class="cf">function</span>(x) <span class="kw">paste0</span>(<span class="kw">formatC</span>(x, <span class="dt">digits =</span> <span class="dv">0</span>, <span class="dt">format =</span> <span class="st">&quot;f&quot;</span>), <span class="st">&quot; %&quot;</span>))) <span class="op">+</span>
+<span class="st">  </span><span class="kw">tm_view</span>(<span class="dt">basemaps =</span> <span class="st">&quot;Stamen.Toner&quot;</span>)
+
+<span class="kw">save_tmap</span>(vystup, <span class="dt">filename =</span> <span class="st">&quot;vystup.html&quot;</span>)
+ </code></pre></div>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
