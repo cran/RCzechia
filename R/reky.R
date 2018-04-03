@@ -1,4 +1,6 @@
-#' Rivers of the Czech Republic
+#' Rivers
+#'
+#' Function returning data frame of rivers of the Czech Republic as sf lines It takes no parameters.
 #'
 #' Due to package size constraints the data are stored externally (and a working internet connection is required to use the package). Downloaded size is 1 MB.
 #'
@@ -15,13 +17,11 @@
 #' @source \url{https://www.arcdata.cz/produkty/geograficka-data/arccr-500}
 #'
 #' @export
-#' @importFrom httr http_error
 
 reky <- function() {
   remote_df <- 'http://rczechia.jla-data.net/Reky.rds'
   if (http_error(remote_df)) {
-    warning('No internet connection or data source broken.')
-    return(NA)
+    stop('No internet connection or data source broken.')
   } else {
     local_df <- readRDS(url(remote_df))
   }

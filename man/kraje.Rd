@@ -14,13 +14,22 @@
 \url{https://www.arcdata.cz/produkty/geograficka-data/arccr-500}
 }
 \usage{
-kraje()
+kraje(resolution = "high")
+}
+\arguments{
+\item{resolution}{Should the function return high or low resolution shapefile? Allowed values are "high" (default) and "low". This parameter affects only the geometry column, all other fields remain the same.}
 }
 \description{
-NUTS3 administrative unit for the Czech Republic.
+Function returning data frame of NUTS3 administrative units for the Czech Republic as sf polygons. It takes a single parameter resolution - high res (default) or low res polygons.
 }
 \details{
-Due to package size constraints the data are stored externally (and a working internet connection is required to use the package). Downloaded size is 2.9 MB (so use with caution, and patience).
+Due to package size constraints the data are stored externally (and a working internet connection is required to use the package). Downloaded size of high resolution shapefile is 2.9 MB (so use with caution, and patience).
+}
+\examples{
+library(sf)
 
-kraje() is a function taking no parameters and returning a data frame; remember to use (empty) brackets in your call.
+hranice <- kraje()
+plot(hranice, col = "white", max.plot = 1)
+
+
 }

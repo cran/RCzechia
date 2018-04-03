@@ -1,8 +1,8 @@
-#' Municipalities with extended powers (obce s rozsirenou pusobnosti)
+#' Obce s rozsirenou pusobnosti
+#'
+#' Function returning data frame of municipalities with extended powers (obce s rozšířenou pusobností) as sf polygons. It takes no parameters.
 #'
 #' Due to package size constraints the data are stored externally (and a working internet connection is required to use the package). Downloaded size is 9 MB (so use with caution, and patience).
-#'
-#'  orp_polygony() is a function taking no parameters and returning a data frame; remember to use (empty) brackets in your call.
 #'
 #' @format sf data frame with 206 rows of 10 variables + geometry
 #'
@@ -25,13 +25,11 @@
 #'
 #'
 #' @export
-#' @importFrom httr http_error
 
 orp_polygony <- function() {
   remote_df <- 'http://rczechia.jla-data.net/ORP.rds'
   if (http_error(remote_df)) {
-    warning('No internet connection or data source broken.')
-    return(NA)
+    stop('No internet connection or data source broken.')
   } else {
     local_df <- readRDS(url(remote_df))
   }
