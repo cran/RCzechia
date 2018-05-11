@@ -12,7 +12,7 @@
 
 <meta name="author" content="Jindra Lacko" />
 
-<meta name="date" content="2018-04-03" />
+<meta name="date" content="2018-05-11" />
 
 <title>Examples of using RCzechia</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">Examples of using RCzechia</h1>
 <h4 class="author"><em>Jindra Lacko</em></h4>
-<h4 class="date"><em>2018-04-03</em></h4>
+<h4 class="date"><em>2018-05-11</em></h4>
 
 
 
@@ -87,11 +87,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="kw">GET</span>(<span class="st">&quot;https://raw.githubusercontent.com/jlacko/RCzechia/master/data-raw/zvcr034.xls&quot;</span>, 
     <span class="kw">write_disk</span>(tf &lt;-<span class="st"> </span><span class="kw">tempfile</span>(<span class="dt">fileext =</span> <span class="st">&quot;.xls&quot;</span>)))
 <span class="co">#&gt; Response [https://raw.githubusercontent.com/jlacko/RCzechia/master/data-raw/zvcr034.xls]</span>
-<span class="co">#&gt;   Date: 2018-04-03 15:59</span>
+<span class="co">#&gt;   Date: 2018-05-11 08:08</span>
 <span class="co">#&gt;   Status: 200</span>
 <span class="co">#&gt;   Content-Type: application/octet-stream</span>
 <span class="co">#&gt;   Size: 44.5 kB</span>
-<span class="co">#&gt; &lt;ON DISK&gt;  /tmp/RtmpdlsRyg/file671490ffba7.xls</span>
+<span class="co">#&gt; &lt;ON DISK&gt;  /tmp/Rtmpr1tj2z/file1f5f7dd5cd45.xls</span>
       <span class="co"># original (ugly!!) format from the Czech Statistical Office</span>
 
 src &lt;-<span class="st"> </span><span class="kw">read_excel</span>(tf, <span class="dt">sheet =</span> <span class="dv">1</span>, <span class="dt">col_names =</span> F) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># read in with fake column names</span>

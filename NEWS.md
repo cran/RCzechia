@@ -1,6 +1,11 @@
+version 1.2.4
+  - added function union_sf to aggregate sf data frames
+  - corrected typos in documentation (NUTS2 vs. NUTS3 in obce)
+  - unit tests optimized
+
 version 1.2.3
   - low resolution shapefiles added for republika, kraje and okresy
-  - internet connection not required for using low resolution shapefiles
+  - internet connection not required for using lo-res shapefiles
   - dependency on tidverse replaced by dplyr
 
 version 1.1.1

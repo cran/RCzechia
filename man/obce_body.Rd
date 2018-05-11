@@ -3,7 +3,7 @@
 \name{obce_body}
 \alias{obce_body}
 \title{Municipalities / communes (obce) as centerpoints}
-\format{sf data frame with 6.258 rows of 14 variables + geometry
+\format{\code{sf} data frame with 6.258 rows of 14 variables + geometry
 
 \describe{
   \item{KOD_OBEC}{Code of the level I commune (obec).}
@@ -18,8 +18,8 @@
   \item{KOD_LAU1}{Code of the LAU1 administrative unit (okres).}
   \item{NAZ_LAU1}{Name of the LAU1 administrative unit (okres).}
   \item{KOD_KRAJ}{Code of the region (kraj).}
-  \item{KOD_CZNUTS2}{Code of the NUTS3 unit (kraj)}
-  \item{NAZ_CZNUTS2}{Name of the NUTS3 unit (kraj)}
+  \item{KOD_CZNUTS3}{Code of the NUTS3 unit (kraj)}
+  \item{NAZ_CZNUTS3}{Name of the NUTS3 unit (kraj)}
   }}
 \source{
 \url{https://www.arcdata.cz/produkty/geograficka-data/arccr-500}
@@ -28,7 +28,7 @@
 obce_body()
 }
 \description{
-Function returning data frame of LAU2 administrative units for the Czech Republic as sf points. It takes no parameters.
+Function returning data frame of LAU2 administrative units for the Czech Republic as \code{sf} points. It takes no parameters.
 }
 \details{
 Due to package size constraints the data are stored externally (and a working internet connection is required to use the package). Downloaded size is 270 KB.
