@@ -19,11 +19,31 @@
 #' @export
 
 casti <- function() {
-  remote_df <- 'http://rczechia.jla-data.net/casti.rds'
-  if (http_error(remote_df)) {
-    stop('No internet connection or data source broken.')
+
+  remote_path <- 'http://rczechia.jla-data.net/'
+
+  file <- 'casti.rds'
+
+  remote_file <- paste0(remote_path, file)
+  local_file <- file.path(tempdir(), file)
+
+  if (file.exists(local_file)) {
+
+    message('RCzechia: using temporary local dataset.')
+
   } else {
-    local_df <- readRDS(url(remote_df))
+
+    if (http_error(remote_file)) {
+
+      stop('No internet connection or data source broken.')
+
+    } else {
+
+      message('RCzechia: downloading remote dataset.')
+      download.file(url = remote_file, destfile = local_file, quiet = T)
+    }
   }
+
+  local_df <- readRDS(local_file)
   local_df
 }

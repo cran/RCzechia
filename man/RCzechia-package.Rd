@@ -5,12 +5,14 @@
 \alias{RCzechia-package}
 \title{RCzechia: Spatial Objects of the Czech Republic}
 \description{
-A selection of spatial objects relevant to the Czech Republic. Due to CRAN package size requirements the objects are stored externally (on Amazon S3) - and thus could not be implemented as datasets, but are functions returning data frames instead.
+A selection of spatial objects relevant to the Czech Republic. Due to CRAN package size requirements (5 MB) the objects are stored externally (on Amazon S3) - and therefore could not be implemented as datasets, they are functions returning data frames instead.
 }
 \details{
+To save time (and bandwidth) the downloaded objects are saved locally in `tempdir` directory when requested and downloaded at most once *per R session*; out of respect to CRAN Repository Policy a more permanent caching on user's side is not implemented.
+
 This means that:
 \itemize{
-  \item  a working internet connection is required to use the full resolution objects
+  \item a working internet connection is required to use the full resolution objects
   \item all objects need to be called with (possibly empty) braces
 }
 

@@ -1,3 +1,6 @@
+version 1.2.5
+  - added support for local cache to speed up calculation and save bandwidth
+
 version 1.2.4
   - added function union_sf to aggregate sf data frames
   - corrected typos in documentation (NUTS2 vs. NUTS3 in obce)

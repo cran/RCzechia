@@ -1,5 +1,4 @@
 # RCzechia  
-
 This project creates a set of shapefiles relevant to the Czech Republic.  
 
 <p align="center">
