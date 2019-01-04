@@ -12,14 +12,14 @@
 
 <meta name="author" content="Jindra Lacko" />
 
-<meta name="date" content="2018-10-30" />
+<meta name="date" content="2019-01-03" />
 
 <title>Solving Real World Issues With RCzechia</title>
 
 
 
 <style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
+<style type="text/css" data-origin="pandoc">
 div.sourceCode { overflow-x: auto; }
 table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
   margin: 0; padding: 0; vertical-align: baseline; border: none; }
@@ -55,7 +55,29 @@ code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
 code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
 code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+
 </style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' || rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
 
 
 
@@ -70,7 +92,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">Solving Real World Issues With RCzechia</h1>
 <h4 class="author"><em>Jindra Lacko</em></h4>
-<h4 class="date"><em>2018-10-30</em></h4>
+<h4 class="date"><em>2019-01-03</em></h4>
 
 
 <div id="TOC">
@@ -97,20 +119,20 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="kw">GET</span>(<span class="st">&quot;https://raw.githubusercontent.com/jlacko/RCzechia/master/data-raw/zvcr034.xls&quot;</span>, 
     <span class="kw">write_disk</span>(tf &lt;-<span class="st"> </span><span class="kw">tempfile</span>(<span class="dt">fileext =</span> <span class="st">&quot;.xls&quot;</span>)))
 ## Response [https://raw.githubusercontent.com/jlacko/RCzechia/master/data-raw/zvcr034.xls]
-##   Date: 2018-10-30 21:22
+##   Date: 2019-01-03 21:14
 ##   Status: 200
 ##   Content-Type: application/octet-stream
 ##   Size: 44.5 kB
-## &lt;ON DISK&gt;  /tmp/Rtmp7DCuGn/file13a1529d98e2.xls
+## &lt;ON DISK&gt;  /tmp/Rtmp7QWxv8/file322b22dec355.xls
 
-src &lt;-<span class="st"> </span><span class="kw">read_excel</span>(tf, <span class="dt">sheet =</span> <span class="dv">1</span>, <span class="dt">col_names =</span> F) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># read in with fake column names</span>
-<span class="st">  </span><span class="kw">select</span>(<span class="dt">NAZ_LAU1 =</span> X__<span class="dv">1</span>, <span class="co"># key for the shapefile</span>
-         <span class="dt">obyvatel =</span> X__<span class="dv">2</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># population (as text)</span>
+src &lt;-<span class="st"> </span><span class="kw">read_excel</span>(tf, <span class="dt">range =</span> <span class="st">&quot;Data!B5:C97&quot;</span>) <span class="co"># read in with original column names</span>
+
+<span class="kw">colnames</span>(src) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">'NAZ_LAU1'</span>, <span class="st">'obyvatel'</span>) <span class="co"># meaningful names instead of the original ones</span>
+
+src &lt;-<span class="st"> </span>src <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">obyvatel =</span> <span class="kw">as.double</span>(obyvatel)) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">    </span><span class="co"># convert from text to number</span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">NAZ_LAU1 =</span> <span class="kw">ifelse</span>(NAZ_LAU1 <span class="op">==</span><span class="st"> &quot;Hlavní město Praha&quot;</span>, <span class="st">&quot;Praha&quot;</span>, NAZ_LAU1)) 
-## Warning in evalq(as.double(obyvatel), &lt;environment&gt;): NAs introduced by
-## coercion
     <span class="co"># rename Prague (from The Capital to a regular city)</span>
   
 okresni_data &lt;-<span class="st"> </span><span class="kw">okresy</span>(<span class="st">&quot;low&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># data shapefile</span>

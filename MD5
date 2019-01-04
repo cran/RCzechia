@@ -1,7 +1,7 @@
-7933ca5fea6f9e3d2a2714d314b50c8a *DESCRIPTION
+757166c2325fd31b3ad24299184d410e *DESCRIPTION
 7a69497bc5b1806a5d61a816f197ca79 *LICENSE
 793c3b1eaac2eeb947956dfb3ce8c70c *NAMESPACE
-a7a182c0f856749126bff0d7dced316f *NEWS.md
+87b36bdf757909d8c4a3dffefc7cb054 *NEWS.md
 c6cc92dac440d71d37025557edd919cf *R/RCzechia.R
 76204c44d8fdd12e6d775ded7a658384 *R/casti.R
 e935d6f45c90eff7a2c81f79b7307272 *R/chr_uzemi.R
@@ -19,10 +19,10 @@ a39443dc48ed1ac6f826e8f4876e3090 *R/sysdata.rda
 93f70c32cd1c56d181a1100538f9ecca *R/union_sf.R
 ab081599e435736c58bcdcd3805a85da *R/zeleznice.R
 32b3d701386c55c7322cea9f8cf491c4 *README.md
-e3308c7b1d6ecf38aba5d9f5d6e67ab9 *build/vignette.rds
-263b38e3aaa08ea71243fe5f4205ca9a *inst/doc/vignette.R
-4fda5bbce527a782e84ffdb81e6500f8 *inst/doc/vignette.Rmd
-9f49803f99323fe3b54d3e76f54aefa7 *inst/doc/vignette.html
+8fe084407ea5ec3fa7293d7d00e85d50 *build/vignette.rds
+1a0487a3c35a30262bfd12dd0ed163ed *inst/doc/vignette.R
+ad09caa4c92dc3a6bae5ddd70d701c62 *inst/doc/vignette.Rmd
+3a32f34ec9b06e410a617562db04fbbb *inst/doc/vignette.html
 559add6af5e22c426dd50d774ba03924 *man/RCzechia-package.Rd
 7e5392572f91f431e3cde8d0741e60bf *man/casti.Rd
 06ae4e0e9ddf8eb3da6795882a741b69 *man/chr_uzemi.Rd
@@ -41,4 +41,4 @@ c0c3b7d9d4a2fb2df0f431d4662824fe *man/orp_polygony.Rd
 788f15c8369afc4b11ad4daa5259674d *tests/testthat.R
 fba416e6138b44e08b399482755b7641 *tests/testthat/test-1-data-structures.R
 881dea05fba5c4cba2b3e917332406e9 *tests/testthat/test-2-code.R
-4fda5bbce527a782e84ffdb81e6500f8 *vignettes/vignette.Rmd
+ad09caa4c92dc3a6bae5ddd70d701c62 *vignettes/vignette.Rmd
