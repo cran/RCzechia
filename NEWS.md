@@ -1,3 +1,6 @@
+version 1.3.3
+  - upgraded shapefile downloads from http:// to https://
+
 version 1.3.2
   - updated vignette (Czech Population) to reflect changes in readxl package
 

@@ -12,7 +12,7 @@
 
 <meta name="author" content="Jindra Lacko" />
 
-<meta name="date" content="2019-01-03" />
+<meta name="date" content="2019-03-06" />
 
 <title>Solving Real World Issues With RCzechia</title>
 
@@ -92,7 +92,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">Solving Real World Issues With RCzechia</h1>
 <h4 class="author"><em>Jindra Lacko</em></h4>
-<h4 class="date"><em>2019-01-03</em></h4>
+<h4 class="date"><em>2019-03-06</em></h4>
 
 
 <div id="TOC">
@@ -119,11 +119,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="kw">GET</span>(<span class="st">&quot;https://raw.githubusercontent.com/jlacko/RCzechia/master/data-raw/zvcr034.xls&quot;</span>, 
     <span class="kw">write_disk</span>(tf &lt;-<span class="st"> </span><span class="kw">tempfile</span>(<span class="dt">fileext =</span> <span class="st">&quot;.xls&quot;</span>)))
 ## Response [https://raw.githubusercontent.com/jlacko/RCzechia/master/data-raw/zvcr034.xls]
-##   Date: 2019-01-03 21:14
+##   Date: 2019-03-06 20:02
 ##   Status: 200
 ##   Content-Type: application/octet-stream
 ##   Size: 44.5 kB
-## &lt;ON DISK&gt;  /tmp/Rtmp7QWxv8/file322b22dec355.xls
+## &lt;ON DISK&gt;  /tmp/RtmpoISzZT/file2ccd1f00be06.xls
 
 src &lt;-<span class="st"> </span><span class="kw">read_excel</span>(tf, <span class="dt">range =</span> <span class="st">&quot;Data!B5:C97&quot;</span>) <span class="co"># read in with original column names</span>
 
