@@ -4,7 +4,7 @@ library(httr)
 library(roxygen2)
 
 
-## ----census, echo = T, eval = T, message = F, fig.align="center", dpi = 100, out.width = '100%'----
+## ----census, echo = T, eval = T, message = F, fig.align="center", dpi = 100, out.width = "100%"----
 library(RCzechia)
 library(dplyr)
 library(readxl)
@@ -17,7 +17,7 @@ GET("https://raw.githubusercontent.com/jlacko/RCzechia/master/data-raw/zvcr034.x
 
 src <- read_excel(tf, range = "Data!B5:C97") # read in with original column names
 
-colnames(src) <- c('NAZ_LAU1', 'obyvatel') # meaningful names instead of the original ones
+colnames(src) <- c("NAZ_LAU1", "obyvatel") # meaningful names instead of the original ones
 
 src <- src %>%
   mutate(obyvatel = as.double(obyvatel)) %>% 
@@ -25,7 +25,7 @@ src <- src %>%
   mutate(NAZ_LAU1 = ifelse(NAZ_LAU1 == "Hlavní město Praha", "Praha", NAZ_LAU1)) 
     # rename Prague (from The Capital to a regular city)
   
-okresni_data <- okresy("low") %>% # data shapefile
+okresni_data <- RCzechia::okresy("low") %>% # data shapefile
   inner_join(src, by = "NAZ_LAU1") 
     # key for data connection - note the use of inner (i.e. filtering) join
 
@@ -38,29 +38,33 @@ vystup <- tm_shape(okresni_data) + tm_fill(col = "obyvatel", title = "Population
 print(vystup)
 
 
-## ----geocode, echo = T, eval = T, message = F, fig.align="center", dpi = 100, out.width = '100%'----
+## ----geocode, echo = T, eval = T, message = F, fig.align="center", dpi = 100, out.width = "100%"----
 library(RCzechia)
 library(dplyr)
 library(tmap)
 library(sf)
 
-rivers <- reky()
+borders <- RCzechia::republika("low")
+
+rivers <- RCzechia::reky()
 
 rivers <- rivers %>%
   filter(Major == T)
 
-mista <- data.frame(misto = c('kramarova vila', 'arcibiskupske zahrady v kromerizi', 'becov nad teplou'),
-                    lon = c(14.41030, 17.39353, 12.83833),
-                    lat = c(50.09380, 49.30048, 50.08346))
+mista <- data.frame(misto =  c("Kramářova vila", 
+                               "Arcibiskupské zahrady v Kromeříži", 
+                               "Hrad Bečov nad Teplou"),
+                    adresa = c("Gogolova 1, Praha 1",
+                               "Sněmovní náměstí 1, Kroměříž",
+                               "nám. 5. května 1, Bečov nad Teplou"))
 
-# to geocode a list of locations consider ggmap::geocode()
+# from a string vector to sf spatial points object
+POI <- RCzechia::geocode(mista$adresa) 
 
-POI <- mista %>% # or geocode using ggmap
-  st_as_sf(coords = c("lon", "lat"), crs = 4326) # convert plain data to spatial CRS = WGS84, used by Google
 
-tm_plot <- tm_shape(republika("low")) + tm_borders("grey30", lwd = 1) +
+tm_plot <- tm_shape(borders) + tm_borders("grey30", lwd = 1) +
   tm_shape(POI) + tm_symbols(col = "firebrick3", shape = 20, size = 0.5) +
-  tm_shape(rivers) + tm_lines(col = 'steelblue', lwd = 1.5, alpha = 0.5) +
+  tm_shape(rivers) + tm_lines(col = "steelblue", lwd = 1.5, alpha = 0.5) +
   tm_legend(title = "Very Special Places") + # ... or whatever :)
   tm_layout(frame = F)
   
@@ -68,7 +72,7 @@ tm_plot <- tm_shape(republika("low")) + tm_borders("grey30", lwd = 1) +
 print(tm_plot)
 
 
-## ----unempl,  echo = T, eval = T, message = F, out.width = '100%', fig.align="center", dpi = 300----
+## ----unempl,  echo = T, eval = T, message = F, out.width = "100%", fig.align="center", dpi = 300----
 library(dplyr)
 library(RCzechia)
 library(tmap)
@@ -81,7 +85,7 @@ src <- read.csv(url("https://raw.githubusercontent.com/jlacko/RCzechia/master/da
 src <- src %>%
   mutate(KOD_OBEC = as.character(uzemi_kod))  # keys in RCzechia are of type character
 
-podklad <- obce_polygony() %>% # obce_polygony = municipalities in RCzechia package
+podklad <- RCzechia::obce_polygony() %>% # obce_polygony = municipalities in RCzechia package
   inner_join(src, by = "KOD_OBEC") # linking by key
 
 
@@ -93,21 +97,51 @@ vystup <- tm_shape(republika()) + tm_borders(col = "grey40") +
 print(vystup)
  
 
-## ----distance, echo = T, eval = T, message = F, fig.align="center", dpi = 100, out.width = '100%'----
+## ----distance, echo = T, eval = T, message = F, fig.align="center", dpi = 100, out.width = "100%"----
 library(dplyr)
 library(RCzechia)
 library(sf)
 library(units)
 
-obce <- obce_polygony()
+obce <- RCzechia::obce_polygony()
 
-praha <- obce[obce$NAZ_OBEC == "Praha", ]
-brno <- obce[obce$NAZ_OBEC == "Brno", ]
+praha <- obce %>%
+  filter(NAZ_OBEC == "Praha")
 
-vzdalenost <- st_distance(praha, brno) %>%
-  set_units("kilometers") # easier to interpret than meters, miles or decimal degrees..
+brno <- obce %>%
+  filter(NAZ_OBEC == "Brno")
+
+vzdalenost <- sf::st_distance(praha, brno) %>%
+  units::set_units("kilometers") # easier to interpret than meters, miles or decimal degrees..
 
 print(vzdalenost)
+
+
+## ----brno-center, echo = T, eval = T, message = F, fig.align="center", dpi = 100, out.width = "100%"----
+library(dplyr)
+library(RCzechia)
+library(tmap)
+library(sf)
+
+brno <- RCzechia::obce_polygony() %>%
+  filter(NAZ_OBEC == "Brno") 
+
+pupek_brna <- sf::st_centroid(brno) # calculate central point of a polygon
+
+# the revgeo() function takes a sf points data frame and returns it back
+# with address data in "revgeocoded"" column
+adresa_pupku <- RCzechia::revgeo(pupek_brna)$revgeocoded
+
+tm_plot <- tm_shape(brno) + tm_borders(col = "grey40") +
+  tm_shape(pupek_brna) + tm_dots(size = 1/3, col = "red", shape = 4) +
+  tm_legend(title = "Center of Brno") + 
+  tm_layout(frame = F)
+  
+print(adresa_pupku)
+
+print(tm_plot)
+
+
 
 
 ## ----interactive, echo = T, eval = F-------------------------------------
@@ -124,7 +158,7 @@ print(vzdalenost)
 #  src <- src %>%
 #    mutate(KOD_OBEC = as.character(uzemi_kod))  # keys in RCzechia are of type character
 #  
-#  podklad <- obce_polygony() %>% # obce_polygony = municipalities in RCzechia package
+#  podklad <- RCzechia::obce_polygony() %>% # obce_polygony = municipalities in RCzechia package
 #    inner_join(src, by = "KOD_OBEC") %>% # linking by key
 #    filter(KOD_CZNUTS3 == "CZ071") # Olomoucký kraj
 #  
@@ -137,15 +171,15 @@ print(vzdalenost)
 #  print(vystup)
 #  
 
-## ----union,  echo = T, eval = T, message = F, out.width = '100%', fig.asp = 0.7, dpi = 100----
+## ----union,  echo = T, eval = T, message = F, out.width = "100%", fig.asp = 0.7, dpi = 100----
 library(RCzechia)
 library(dplyr)
 library(sf)
 
 
-poly <- okresy("low") %>% # Czech LAU1 regions as sf data frame
+poly <- RCzechia::okresy("low") %>% # Czech LAU1 regions as sf data frame
   mutate(oddeven = ifelse(nchar(NAZ_LAU1) %% 2 == 1, "odd", "even" )) %>% # odd or even?
-  union_sf("oddeven") # ... et facta est lux
+  RCzechia::union_sf("oddeven") # ... et facta est lux
 
 plot(poly, key.pos = 1)
 
