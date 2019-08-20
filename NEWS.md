@@ -1,3 +1,8 @@
+## version 1.4.2
+  - KFME grid cells (faunistické čtverce) object added
+  
+  - minor optimization of geocode() and tests 
+
 ## version 1.4.1
 
   - downgraded error on unavailable internet to message in line with updates to CRAN policy

@@ -40,16 +40,12 @@ print(vystup)
 
 ## ----geocode, echo = T, eval = T, message = F, fig.align="center", dpi = 100, out.width = "100%"----
 library(RCzechia)
-library(dplyr)
 library(tmap)
 library(sf)
 
 borders <- RCzechia::republika("low")
 
-rivers <- RCzechia::reky()
-
-rivers <- rivers %>%
-  filter(Major == T)
+rivers <- subset(RCzechia::reky(), Major == T)
 
 mista <- data.frame(misto =  c("Kramářova vila", 
                                "Arcibiskupské zahrady v Kromeříži", 
@@ -105,11 +101,9 @@ library(units)
 
 obce <- RCzechia::obce_polygony()
 
-praha <- obce %>%
-  filter(NAZ_OBEC == "Praha")
+praha <- subset(obce, NAZ_OBEC == "Praha")
 
-brno <- obce %>%
-  filter(NAZ_OBEC == "Brno")
+brno <- subset(obce, NAZ_OBEC == "Brno")
 
 vzdalenost <- sf::st_distance(praha, brno) %>%
   units::set_units("kilometers") # easier to interpret than meters, miles or decimal degrees..
@@ -123,8 +117,7 @@ library(RCzechia)
 library(tmap)
 library(sf)
 
-brno <- RCzechia::obce_polygony() %>%
-  filter(NAZ_OBEC == "Brno")
+brno <- subset(RCzechia::obce_polygony(), NAZ_OBEC == "Brno")
 
 pupek_brna <- brno %>%
   st_transform(5514) %>% # planar CRS (eastings & northings)
@@ -184,4 +177,36 @@ poly <- RCzechia::okresy("low") %>% # Czech LAU1 regions as sf data frame
   RCzechia::union_sf("oddeven") # ... et facta est lux
 
 plot(poly, key.pos = 1)
+
+## ----ctverce, echo = T, eval = T, message = F, warning = F, out.width = "100%",fig.asp = 0.7, dpi = 100----
+library(RCzechia)
+library(ggplot2)
+library(dplyr)
+library(sf)
+
+obec <- "Humpolec" # a Czech location
+
+# geolocate centroid of a place
+place <- RCzechia::geocode(obec) %>% 
+  filter(typ == "Obec") 
+
+# ID of the KFME square containg place geocoded
+ctverec_id <- sf::st_intersection(RCzechia::KFME_grid(), place)$ctverec
+
+print(paste0("Location found in grid cell number ", ctverec_id, "."))
+
+# a single KFME square to be highlighted
+highlighted_cell <- KFME_grid() %>% 
+  filter(ctverec == ctverec_id) 
+
+# a summary plot
+ggplot() +
+  geom_sf(data = RCzechia::republika(), size = .85) + # Czech borders
+  geom_sf(data = highlighted_cell, # a specific KFME cell ...
+          fill = "limegreen", alpha = .5) +  # ... highlighted in lime green
+  geom_sf(data = KFME_grid(), size = .33, # all KFME grid cells, thin
+          color = "gray80", fill = NA) + # in gray and without fill
+  geom_sf(data = place,  color = "red", pch = 4) +  # X marks the spot!
+  ggtitle(paste("Location", obec, "in grid cell number", ctverec_id))
+
 
