@@ -14,6 +14,8 @@ For examples of RCzechia in action please see the package vignette:
 * [Geographical Center of the City of Brno](https://CRAN.R-project.org/package=RCzechia/vignettes/vignette.html#geographical-center-of-the-city-of-brno)
 * [Interactive Map](https://CRAN.R-project.org/package=RCzechia/vignettes/vignette.html#interactive-map)
 * [Dissolving sf Polygons](https://CRAN.R-project.org/package=RCzechia/vignettes/vignette.html#dissolving-sf-polygons)
+* [KFME Grid Cells - faunistické čtverce](https://CRAN.R-project.org/package=RCzechia/vignettes/vignette.html#kfme-grid-cells)
+* [Terrain of the Czech Republic](https://CRAN.R-project.org/package=RCzechia/vignettes/vignette.html#terrain-of-the-czech-republic)
 
 
 The shapefiles are based on ArcČR 500 (https://www.arcdata.cz/produkty/geograficka-data/arccr-500) with some adjustments:  
@@ -25,7 +27,7 @@ The shapefiles are based on ArcČR 500 (https://www.arcdata.cz/produkty/geografi
 
 The default resolution is 1 meter; this makes the shapefiles 1) very accurate and 2) rather large. This level of detail is not always necessary, and often not beneficial - a lower resolution shapefile is not only smaller in memory, but also smoother and more aesthetically pleasing. For the most commonly used shapes (*republika*, *kraje* and *okresy*) an optional low resolution version is also included. To access it specify the value of `resolution` parameter as `"low"` (default is `"high"`).
 
-Using of the lo-res versions does not require a working internet connection. To use the high resolution (default) shapefile a working intenet connection is necessary, as the data files were too big to meet the CRAN requirements on package size and must be stored externally. Access to the external files is logged, from time to time I check the logs (mainly to understand my bandwidth charges).
+Using of the lo-res versions does not require a working internet connection. To use the high resolution (default) shapefile a working intenet connection is necessary, as the data files were too big to meet the CRAN requirements of package size and must be stored externally. Access to the external files is logged, from time to time I check the logs (mainly to understand my bandwidth charges).
 
 ### A note to Czech users
 Tohle je "oficiální", a tedy anglické, readme. Českou verzi naleznete na http://www.jla-data.net/cze/package-rczechia/
@@ -58,6 +60,7 @@ Key is KOD.
 * **chr_uzemi**: protected natural areas (Chráněná území)
 * **lesy**: woodland areas (more than 30 ha in area)
 * **KFME_grid**: KFME grid cells (faunistické čtverce)
+* **vyskopis**: terrain of the Czech republic as a {raster} package object
 
 All objects are implemented as functions returning data frames, so must be followed by brackets (i.e. `hranice <- republika()`).
 

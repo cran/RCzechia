@@ -1,15 +1,14 @@
 ## ----setup, include = FALSE----------------------------------------------
-knitr::opts_chunk$set(collapse = T, fig.width = 8, fig.height = 6)
+knitr::opts_chunk$set(collapse = T, fig.align="center", dpi = 150, out.width = "100%", fig.width = 8, fig.height = 4)
 library(httr)
 library(roxygen2)
 
-
-## ----census, echo = T, eval = T, message = F, fig.align="center", dpi = 100, out.width = "100%"----
+## ----census, echo = T, eval = T, message = F-----------------------------
 library(RCzechia)
-library(dplyr)
+library(ggplot2)
 library(readxl)
+library(dplyr)
 library(httr)
-library(tmap)
 library(sf)
 
 GET("https://raw.githubusercontent.com/jlacko/RCzechia/master/data-raw/zvcr034.xls", 
@@ -29,18 +28,23 @@ okresni_data <- RCzechia::okresy("low") %>% # data shapefile
   inner_join(src, by = "NAZ_LAU1") 
     # key for data connection - note the use of inner (i.e. filtering) join
 
-vystup <- tm_shape(okresni_data) + tm_fill(col = "obyvatel", title = "Population", 
-                                           palette = "Blues", style = "quantile", n = 5) +
-  tm_shape(okresni_data) + tm_borders("grey40", lwd = 0.5) + # thin edges of districts
-  tm_shape(republika("low")) + tm_borders("grey30", lwd = 1.5) + # thick national borders
-  tm_layout(frame = F) # clean does it
+ggplot(data = okresni_data) +
+  geom_sf(aes(fill = obyvatel), colour = NA) +
+  geom_sf(data = republika(), color = "gray30", fill = NA) +
+  scale_fill_viridis_c(trans = "log", labels = scales::comma) +
+  labs(title = "Czech population",
+       fill = "population\n(log scale)") +
+  theme_bw() +
+  theme(legend.text.align = 1,
+        legend.title.align = 0.5)
 
-print(vystup)
 
 
-## ----geocode, echo = T, eval = T, message = F, fig.align="center", dpi = 100, out.width = "100%"----
+
+
+## ----geocode, echo = T, eval = T, message = F, warning = F,fig.width = 8, fig.height = 5----
 library(RCzechia)
-library(tmap)
+library(ggplot2)
 library(sf)
 
 borders <- RCzechia::republika("low")
@@ -57,43 +61,15 @@ mista <- data.frame(misto =  c("Kramářova vila",
 # from a string vector to sf spatial points object
 POI <- RCzechia::geocode(mista$adresa) 
 
-
-tm_plot <- tm_shape(borders) + tm_borders("grey30", lwd = 1) +
-  tm_shape(POI) + tm_symbols(col = "firebrick3", shape = 20, size = 0.5) +
-  tm_shape(rivers) + tm_lines(col = "steelblue", lwd = 1.5, alpha = 0.5) +
-  tm_legend(title = "Very Special Places") + # ... or whatever :)
-  tm_layout(frame = F)
-  
-
-print(tm_plot)
+ggplot() +
+  geom_sf(data = POI, color = "red", shape = 4, size = 2) +
+  geom_sf(data = rivers, color = "steelblue", alpha = 0.5) +
+  geom_sf(data = borders, color = "grey30", fill = NA) +
+  labs(title = "Very Special Places") +
+  theme_bw()
 
 
-## ----unempl,  echo = T, eval = T, message = F, out.width = "100%", fig.align="center", dpi = 300----
-library(dplyr)
-library(RCzechia)
-library(tmap)
-library(sf)
-
-src <- read.csv(url("https://raw.githubusercontent.com/jlacko/RCzechia/master/data-raw/unempl.csv"), stringsAsFactors = F) 
-# open data on unemployment from Czech Statistical Office - https://www.czso.cz/csu/czso/otevrena_data
-# lightly edited for size (rows filtered)
-
-src <- src %>%
-  mutate(KOD_OBEC = as.character(uzemi_kod))  # keys in RCzechia are of type character
-
-podklad <- RCzechia::obce_polygony() %>% # obce_polygony = municipalities in RCzechia package
-  inner_join(src, by = "KOD_OBEC") # linking by key
-
-
-vystup <- tm_shape(republika()) + tm_borders(col = "grey40") +
-  tm_shape(podklad) + tm_fill(col = "hodnota", title = "Unemployment", palette = "YlOrRd") +
-  tm_legend(legend.format = list(fun = function(x) paste0(formatC(x, digits = 0, format = "f"), " %"))) +
-  tm_layout(frame = F)
-
-print(vystup)
- 
-
-## ----distance, echo = T, eval = T, message = F, fig.align="center", dpi = 100, out.width = "100%"----
+## ----distance, echo = T, eval = T, message = F---------------------------
 library(dplyr)
 library(RCzechia)
 library(sf)
@@ -111,10 +87,10 @@ vzdalenost <- sf::st_distance(praha, brno) %>%
 print(vzdalenost)
 
 
-## ----brno-center, echo = T, eval = T, message = F, fig.align="center", dpi = 100, out.width = "100%"----
+## ----brno-center, echo = T, eval = T, message = F, fig.width = 6, fig.height = 6----
 library(dplyr)
 library(RCzechia)
-library(tmap)
+library(ggplot2)
 library(sf)
 
 brno <- subset(RCzechia::obce_polygony(), NAZ_OBEC == "Brno")
@@ -127,14 +103,13 @@ pupek_brna <- brno %>%
 # with address data in "revgeocoded"" column
 adresa_pupku <- RCzechia::revgeo(pupek_brna)$revgeocoded
 
-tm_plot <- tm_shape(brno) + tm_borders(col = "grey40") +
-  tm_shape(pupek_brna) + tm_dots(size = 1/3, col = "red", shape = 4) +
-  tm_legend(title = "Center of Brno") + 
-  tm_layout(frame = F)
-  
 print(adresa_pupku)
 
-print(tm_plot)
+ggplot() +
+  geom_sf(data = pupek_brna, col = "red", shape = 4, size = 2) +
+  geom_sf(data = brno, color = "grey30", fill = NA) +
+  labs(title = "Geographical Center of Brno") +
+  theme_bw()
 
 
 
@@ -142,7 +117,7 @@ print(tm_plot)
 ## ----interactive, echo = T, eval = F-------------------------------------
 #  library(dplyr)
 #  library(RCzechia)
-#  library(tmap)
+#  library(leaflet)
 #  library(sf)
 #  
 #  src <- read.csv(url("https://raw.githubusercontent.com/jlacko/RCzechia/master/data-raw/unempl.csv"), stringsAsFactors = F)
@@ -157,17 +132,19 @@ print(tm_plot)
 #    inner_join(src, by = "KOD_OBEC") %>% # linking by key
 #    filter(KOD_CZNUTS3 == "CZ071") # Olomoucký kraj
 #  
-#  tmap_mode("view")
+#  pal <- colorNumeric(palette = "viridis",  domain = podklad$hodnota)
 #  
-#  vystup <- tm_shape(podklad) + tm_fill(col = "hodnota", title = "Unemployment", palette = "YlOrRd", id = "NAZ_OBEC") +
-#    tm_legend(legend.format = list(fun = function(x) paste0(formatC(x, digits = 0, format = "f"), " %"))) +
-#    tm_view(basemaps = "Stamen.Toner")
-#  
-#  print(vystup)
+#  leaflet() %>%
+#    addProviderTiles("Stamen.Toner") %>%
+#    addPolygons(data = podklad,
+#                fillColor = ~pal(hodnota),
+#                fillOpacity = 0.75,
+#                color = NA)
 #  
 
-## ----union,  echo = T, eval = T, message = F, out.width = "100%", fig.asp = 0.7, dpi = 100----
+## ----union,  echo = T, eval = T, message = F-----------------------------
 library(RCzechia)
+library(ggplot2)
 library(dplyr)
 library(sf)
 
@@ -176,9 +153,18 @@ poly <- RCzechia::okresy("low") %>% # Czech LAU1 regions as sf data frame
   mutate(oddeven = ifelse(nchar(NAZ_LAU1) %% 2 == 1, "odd", "even" )) %>% # odd or even?
   RCzechia::union_sf("oddeven") # ... et facta est lux
 
-plot(poly, key.pos = 1)
+# Structure of the "poly" object:
+head(poly)
 
-## ----ctverce, echo = T, eval = T, message = F, warning = F, out.width = "100%",fig.asp = 0.7, dpi = 100----
+ggplot(data = poly, aes(fill = key)) +
+  geom_sf() +
+  scale_fill_viridis_d() +
+  labs(title = "Number of characters in names of Czech districts",
+       fill = "Odd or even?") +
+  theme_bw()
+
+
+## ----ctverce, echo = T, eval = T, message = F, warning = F,fig.width = 8, fig.height = 5----
 library(RCzechia)
 library(ggplot2)
 library(dplyr)
@@ -207,6 +193,28 @@ ggplot() +
   geom_sf(data = KFME_grid(), size = .33, # all KFME grid cells, thin
           color = "gray80", fill = NA) + # in gray and without fill
   geom_sf(data = place,  color = "red", pch = 4) +  # X marks the spot!
-  ggtitle(paste("Location", obec, "in grid cell number", ctverec_id))
+  ggtitle(paste("Location", obec, "in grid cell number", ctverec_id)) +
+  theme_bw()
+
+
+## ----relief, echo = T, eval = T, message = F, warning = F,fig.width = 8, fig.height = 5----
+library(RCzechia)
+library(ggplot2)
+library(dplyr)
+library(raster)
+
+# ggplot does not play nice with {raster} package; a data frame is required
+relief <- vyskopis("rayshaded") %>% 
+  as("SpatialPixelsDataFrame") %>% 
+  as_tibble()
+
+ggplot() +
+  geom_raster(data = relief, aes(x = x, y  = y, alpha = -raytraced), # relief
+              fill = "gray30",  show.legend = F) + # no legend is necessary
+  geom_sf(data = subset(RCzechia::reky(), Major == T), # major rivers
+          color = "steelblue", alpha = .7) +
+  labs(title = "Czech Rivers & Their Basins") +
+  theme_bw() +
+  theme(axis.title = element_blank())
 
 

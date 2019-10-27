@@ -1,4 +1,13 @@
+## version 1.4.3
+
+  - vyskopis() function added to facilitate rasters of Czech relief; dependency on {raster} introduced
+  
+  - dependency on {sf} changed from Imports to Depends (loading of RCzechia triggers a load of sf)
+
+  - dependency on {tmap} decommissioned, vignette refactored to {ggplot2} & {leaflet} only
+
 ## version 1.4.2
+
   - KFME grid cells (faunistické čtverce) object added
   
   - minor optimization of geocode() and tests 
