@@ -1,9 +1,9 @@
-## ----setup, include = FALSE----------------------------------------------
+## ----setup, include = FALSE---------------------------------------------------
 knitr::opts_chunk$set(collapse = T, fig.align="center", dpi = 150, out.width = "100%", fig.width = 8, fig.height = 4)
 library(httr)
 library(roxygen2)
 
-## ----census, echo = T, eval = T, message = F-----------------------------
+## ----census, echo = T, eval = T, message = F----------------------------------
 library(RCzechia)
 library(ggplot2)
 library(readxl)
@@ -69,7 +69,7 @@ ggplot() +
   theme_bw()
 
 
-## ----distance, echo = T, eval = T, message = F---------------------------
+## ----distance, echo = T, eval = T, message = F--------------------------------
 library(dplyr)
 library(RCzechia)
 library(sf)
@@ -97,6 +97,7 @@ brno <- subset(RCzechia::obce_polygony(), NAZ_OBEC == "Brno")
 
 pupek_brna <- brno %>%
   st_transform(5514) %>% # planar CRS (eastings & northings)
+  st_set_agr('constant') %>%  # not strictly necessary, but avoids error message
   sf::st_centroid(brno) # calculate central point of a polygon
 
 # the revgeo() function takes a sf points data frame and returns it back
@@ -114,7 +115,7 @@ ggplot() +
 
 
 
-## ----interactive, echo = T, eval = F-------------------------------------
+## ----interactive, echo = T, eval = F------------------------------------------
 #  library(dplyr)
 #  library(RCzechia)
 #  library(leaflet)
@@ -142,7 +143,7 @@ ggplot() +
 #                color = NA)
 #  
 
-## ----union,  echo = T, eval = T, message = F-----------------------------
+## ----union,  echo = T, eval = T, message = F----------------------------------
 library(RCzechia)
 library(ggplot2)
 library(dplyr)
@@ -156,7 +157,7 @@ poly <- RCzechia::okresy("low") %>% # Czech LAU1 regions as sf data frame
 # Structure of the "poly" object:
 head(poly)
 
-ggplot(data = poly, aes(fill = key)) +
+ggplot(data = poly, aes(fill = oddeven)) +
   geom_sf() +
   scale_fill_viridis_d() +
   labs(title = "Number of characters in names of Czech districts",

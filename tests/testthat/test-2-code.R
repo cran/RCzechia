@@ -13,12 +13,25 @@ wtf <- data.frame(col = c(1, 2, 3)) # data frame se sloupcem col - má se rozbí
 
 expect_error(union_sf(wtf, "col")) # čekám chybu - není spatial
 expect_error(union_sf(okresy("low"))) # čekám chybu - chybí key
-expect_error(union_sf(key = "col")) # čekám chybu - chybí .data
+expect_error(union_sf(key = "col")) # čekám chybu - chybí data
 expect_error(union_sf(okresy("low"), "bflm")) # čekám chybu - není sloupec z data frame
+expect_error(union_sf(okresy("low"), c("KOD_LAU1", "NAZ_LAU1"))) # čekám chybu - klíč má být jeden
 
-united_praha <- casti() %>% # Praha vzniklá spojením z městských částí
-  union_sf("NAZ_OBEC") %>%
-  filter(key == "Praha")
+united_casti <- casti() %>% # všechny obce vzniklé spojením z městských částí
+  union_sf("NAZ_OBEC")
+
+# cyklus se nezastaví na jedničce
+expect_gt(nrow(united_casti), 1)
+
+# praha z částí
+united_praha <- united_casti %>%
+  filter(NAZ_OBEC == "Praha")
+
+# praha je jedna
+expect_equal(nrow(united_praha), 1)
+
+# sloupce odpovídají zadání
+expect_equal(colnames(united_praha), c("NAZ_OBEC", "geometry"))
 
 ofiko_praha <- kraje() %>% # Praha jako kraj
   filter(KOD_CZNUTS3 == "CZ010")
@@ -41,8 +54,10 @@ expect_equal(st_area(united_praha), st_area(ofiko_praha), tolerance = 1e-6)
 
 context("geocode")
 
-dos_sochoros <- c("pplk. Sochora 4, Praha", # platná adresa
-                  "pplk. Sochora 4, Čierna pri Čope") # neplatná adresa
+dos_sochoros <- c(
+  "pplk. Sochora 4, Praha", # platná adresa
+  "pplk. Sochora 4, Čierna pri Čope"
+) # neplatná adresa
 
 # očekávané chyby - špatné zadání
 expect_error(geocode()) # čekám chybu - není cíl
@@ -54,7 +69,7 @@ Sys.setenv("NETWORK_UP" = TRUE)
 # vrací se sf objekt
 expect_s3_class(geocode(dos_sochoros[1]), "sf") # vrací se class sf
 
-#správné hlavičky sloupců
+# správné hlavičky sloupců
 expect_equal(geocode(dos_sochoros) %>% colnames(), c("target", "typ", "address", "geometry"))
 
 # CRS má očekávanou hodnotu
@@ -77,9 +92,11 @@ context("revgeo")
 sochor_wgs <- geocode(dos_sochoros[1]) # podle WGS84
 sochor_krovak <- st_transform(sochor_wgs, 5514) # totéž, dle Křováka
 
-amerika <- data.frame(place = c("Statue of Liberty", "Golden Gate Bridge"), # zcela jasně out of scope pro ČÚZK
-                            x = c(-74.044444, -122.478611),
-                            y = c(40.689167, 37.819722)) %>%
+amerika <- data.frame(
+  place = c("Statue of Liberty", "Golden Gate Bridge"), # zcela jasně out of scope pro ČÚZK
+  x = c(-74.044444, -122.478611),
+  y = c(40.689167, 37.819722)
+) %>%
   st_as_sf(coords = c("x", "y")) %>%
   st_set_crs(4326)
 
@@ -108,5 +125,3 @@ expect_equal(revgeo(tres_sochoros)$revgeocoded, rep("Pplk. Sochora 1391/4, Hole�
 
 # platný sf objekt, ale out of scope českého katastru
 expect_equal(revgeo(amerika)$revgeocoded %>% is.na() %>% unique(), T) # vrací se pouze NA ...
-
-

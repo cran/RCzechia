@@ -1,3 +1,12 @@
+## version 1.4.5
+  
+  - tidyverse style guide applied
+  
+  - examples updated to resolve warnings
+  
+  - bug in union_sf() corrected
+
+
 ## version 1.4.3
 
   - vyskopis() function added to facilitate rasters of Czech relief; dependency on {raster} introduced
@@ -16,7 +25,7 @@
 
   - downgraded error on unavailable internet to message in line with updates to CRAN policy
   
-  - internal optimalization
+  - internal optimization
  
 ## version 1.4.0
 
@@ -64,7 +73,7 @@
 
   - internet connection not required for using lo-res shapefiles  
 
-  - dependency on tidverse replaced by dplyr  
+  - dependency on tidyverse replaced by dplyr  
 
 ## version 1.1.1  
 
