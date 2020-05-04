@@ -11,8 +11,10 @@ library(dplyr)
 library(httr)
 library(sf)
 
+tf <- tempfile(fileext = ".xls") # a temporary xls file
+
 GET("https://raw.githubusercontent.com/jlacko/RCzechia/master/data-raw/zvcr034.xls", 
-    write_disk(tf <- tempfile(fileext = ".xls")))
+    write_disk(tf))
 
 src <- read_excel(tf, range = "Data!B5:C97") # read in with original column names
 
@@ -28,9 +30,10 @@ okresni_data <- RCzechia::okresy("low") %>% # data shapefile
   inner_join(src, by = "NAZ_LAU1") 
     # key for data connection - note the use of inner (i.e. filtering) join
 
+# report results
 ggplot(data = okresni_data) +
   geom_sf(aes(fill = obyvatel), colour = NA) +
-  geom_sf(data = republika(), color = "gray30", fill = NA) +
+  geom_sf(data = republika("low"), color = "gray30", fill = NA) +
   scale_fill_viridis_c(trans = "log", labels = scales::comma) +
   labs(title = "Czech population",
        fill = "population\n(log scale)") +
@@ -54,13 +57,16 @@ rivers <- subset(RCzechia::reky(), Major == T)
 mista <- data.frame(misto =  c("Kramářova vila", 
                                "Arcibiskupské zahrady v Kromeříži", 
                                "Hrad Bečov nad Teplou"),
-                    adresa = c("Gogolova 1, Praha 1",
+                    adresa = c("Gogolova 212, Praha 1",
                                "Sněmovní náměstí 1, Kroměříž",
                                "nám. 5. května 1, Bečov nad Teplou"))
 
 # from a string vector to sf spatial points object
 POI <- RCzechia::geocode(mista$adresa) 
 
+class(POI) # in {sf} package format = spatial and data frame
+
+# report results
 ggplot() +
   geom_sf(data = POI, color = "red", shape = 4, size = 2) +
   geom_sf(data = rivers, color = "steelblue", alpha = 0.5) +
@@ -84,7 +90,8 @@ brno <- subset(obce, NAZ_OBEC == "Brno")
 vzdalenost <- sf::st_distance(praha, brno) %>%
   units::set_units("kilometers") # easier to interpret than meters, miles or decimal degrees..
 
-print(vzdalenost)
+# report results
+print(vzdalenost[1])
 
 
 ## ----brno-center, echo = T, eval = T, message = F, fig.width = 6, fig.height = 6----
@@ -93,8 +100,10 @@ library(RCzechia)
 library(ggplot2)
 library(sf)
 
-brno <- subset(RCzechia::obce_polygony(), NAZ_OBEC == "Brno")
+# polygon of Brno city
+brno <- dplyr::filter(RCzechia::okresy(), KOD_LAU1 == "CZ0642")
 
+# calculate centroid
 pupek_brna <- brno %>%
   st_transform(5514) %>% # planar CRS (eastings & northings)
   st_set_agr('constant') %>%  # not strictly necessary, but avoids error message
@@ -104,11 +113,13 @@ pupek_brna <- brno %>%
 # with address data in "revgeocoded"" column
 adresa_pupku <- RCzechia::revgeo(pupek_brna)$revgeocoded
 
+# report results
 print(adresa_pupku)
 
 ggplot() +
-  geom_sf(data = pupek_brna, col = "red", shape = 4, size = 2) +
-  geom_sf(data = brno, color = "grey30", fill = NA) +
+  geom_sf(data = pupek_brna, col = "red", shape = 4) +
+  geom_sf(data = reky("Brno"), color = "skyblue3") +
+  geom_sf(data = brno, color = "grey50", fill = NA) +
   labs(title = "Geographical Center of Brno") +
   theme_bw()
 
@@ -157,6 +168,7 @@ poly <- RCzechia::okresy("low") %>% # Czech LAU1 regions as sf data frame
 # Structure of the "poly" object:
 head(poly)
 
+# report results
 ggplot(data = poly, aes(fill = oddeven)) +
   geom_sf() +
   scale_fill_viridis_d() +
@@ -171,22 +183,25 @@ library(ggplot2)
 library(dplyr)
 library(sf)
 
-obec <- "Humpolec" # a Czech location
+obec <- "Humpolec" # a Czech location, as a string
 
 # geolocate centroid of a place
 place <- RCzechia::geocode(obec) %>% 
   filter(typ == "Obec") 
 
-# ID of the KFME square containg place geocoded
-ctverec_id <- sf::st_intersection(RCzechia::KFME_grid(), place)$ctverec
+class(place) # a spatial data frame
+
+# ID of the KFME square containg place geocoded (via spatial join)
+ctverec_id <- sf::st_join(RCzechia::KFME_grid(), 
+                          place, left = F)$ctverec
 
 print(paste0("Location found in grid cell number ", ctverec_id, "."))
 
-# a single KFME square to be highlighted
+# a single KFME square to be highlighted as a polygon
 highlighted_cell <- KFME_grid() %>% 
   filter(ctverec == ctverec_id) 
 
-# a summary plot
+# report results
 ggplot() +
   geom_sf(data = RCzechia::republika(), size = .85) + # Czech borders
   geom_sf(data = highlighted_cell, # a specific KFME cell ...
@@ -206,9 +221,10 @@ library(raster)
 
 # ggplot does not play nice with {raster} package; a data frame is required
 relief <- vyskopis("rayshaded") %>% 
-  as("SpatialPixelsDataFrame") %>% 
+  as("SpatialPixelsDataFrame") %>% # old style format - {sp}
   as_tibble()
 
+# report results
 ggplot() +
   geom_raster(data = relief, aes(x = x, y  = y, alpha = -raytraced), # relief
               fill = "gray30",  show.legend = F) + # no legend is necessary

@@ -28,6 +28,10 @@
 #'    \item{No items were matched at all: the function returns NA.
 #' }}
 #'
+#' Note that character encoding is heavily platform dependent, and you may need to convert to UTF-8,
+#' e.g. by running \code{address <- iconv(address, from = "windows-1250", to = "UTF-8")}
+#' before calling the function.
+#'
 #' Usage of the ČÚZK API is governed by ČÚZK Terms & Conditions -
 #' \url{https://geoportal.cuzk.cz/Dokumenty/Podminky.pdf}.
 #'
@@ -45,7 +49,7 @@
 #'
 #'
 #' @examples
-#' asdf <- geocode("Pod sídlištěm 9, Praha 8") # physical address of ČÚZK
+#' asdf <- geocode("Gogolova 212, Praha 1")
 #' print(asdf)
 #' @export
 #' @importFrom magrittr %>%
@@ -56,7 +60,6 @@ geocode <- function(address, crs = 4326) {
   network <- as.logical(Sys.getenv("NETWORK_UP", unset = TRUE)) # dummy variable to allow testing of network
 
   if (missing(address)) stop("required argument address is missing")
-
 
   result <- data.frame(
     target = character(),
