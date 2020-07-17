@@ -1,7 +1,7 @@
-339b1e4dbbdaf693fab642c9bc523709 *DESCRIPTION
+d87dc7857d69683bf0710485905161be *DESCRIPTION
 00a47556a47b810cd64c39722faa2e39 *LICENSE
 7d058bd6003f2c8bd002cd297a76e5d2 *NAMESPACE
-d59bfa5507e4e85675df5eeb158f44c8 *NEWS.md
+d88fa65ebe17c42fb6a9cba1ca1d70e6 *NEWS.md
 b3c366906dd8f1a789fa80a3dc993a14 *R/KFME_grid.R
 80317e5ead0d0defda63169085e0f5c4 *R/RCzechia.R
 186c5fcb19ffd9981238b44e13a2e483 *R/casti.R
@@ -19,15 +19,15 @@ a755cf9cac47a091aa560997bbabec10 *R/okresy.R
 e2b2880d513a0367a432007673fa0334 *R/republika.R
 0793aa62902bf893f2c20f7fd1af8b76 *R/revgeo.R
 cfc05d363ab3adbe7f6e77d5154d0376 *R/silnice.R
-05e54e2855f89b05cf4a603e5db173bf *R/sysdata.rda
+7cd4ffec2864883c13aa38c7c768c4e9 *R/sysdata.rda
 c38c6d7f755112ad30c2f3a0ae9726ef *R/union_sf.R
 4b78034f18eba15b2540f4b5e20945d1 *R/vyskopis.R
 fb34a8a3a33c0f47db542273b6ffbbf1 *R/zeleznice.R
 50b46759158319eda5a8e48b2ea69857 *README.md
-6a59b147e09d456a999b741a1e00e55f *build/vignette.rds
+6266ac5386bcc8cf9d7eb0edcec9634f *build/vignette.rds
 d33a2bb61d7d8d90c3d2cff37588c379 *inst/doc/vignette.R
 c62bb7fb08a9afbbca5b9b8d3b63e112 *inst/doc/vignette.Rmd
-016bdd49bf222e720022e58b15c262a8 *inst/doc/vignette.html
+ec60c8f839464cc61fd518489a0b8354 *inst/doc/vignette.html
 7e05da6cfa2e863fcbead54a17d07c86 *man/KFME_grid.Rd
 260050ff6c35b2226753406947ba72a1 *man/RCzechia-package.Rd
 37766daa30e443ec4ab2612e6735d5d2 *man/casti.Rd
@@ -49,6 +49,6 @@ b2e75eda6536611ddd4d853b5505e51f *man/revgeo.Rd
 e42fe18728fc4726353504f1f294d3d4 *man/vyskopis.Rd
 308565800410f3019e1b46ea6f6ac9b5 *man/zeleznice.Rd
 788f15c8369afc4b11ad4daa5259674d *tests/testthat.R
-b329bd1d5c802d867c70d75488a22a8e *tests/testthat/test-1-data-structures.R
+2ad713ba4a20f5bc6aca758c8a2e3a2f *tests/testthat/test-1-data-structures.R
 95c538a3c1ce3cc24d7e020a68f1d2a9 *tests/testthat/test-2-code.R
 c62bb7fb08a9afbbca5b9b8d3b63e112 *vignettes/vignette.Rmd
