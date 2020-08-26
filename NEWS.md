@@ -1,3 +1,11 @@
+## version 1.5.3
+  
+  - bugfix in simplified shapefiles / kraje("low")
+  
+  - unit tests updated
+  
+  - url of vanity badges changed to https
+
 ## version 1.5.1
 
   - minor correction of simplified shapefiles (low res objects)
