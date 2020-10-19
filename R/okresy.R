@@ -2,7 +2,9 @@
 #'
 #' Function returning data frame of LAU1 administrative units for the Czech Republic as \code{sf} polygons. It takes a single parameter resolution - high res (default) or low res polygons.
 #'
-#' Due to package size constraints the data are stored externally (and a working internet connection is required to use the package). Downloaded size of high resolution shapefile is 1 MB (so use with caution, and patience).
+#' Due to package size constraints the data are stored externally (and a working internet connection is required to use the package).
+#'
+#' The data is current to September 2020. Downloaded size of high resolution shapefile 1 MB.
 #'
 #' @param resolution Should the function return high or low resolution shapefile? Allowed values are "high" (default) and "low". This parameter affects only the geometry column, all other fields remain the same.
 #'
@@ -17,7 +19,7 @@
 #'   \item{NAZ_CZNUTS3}{Name of the region (kraj).}
 #' }
 #'
-#' @source \url{https://vdp.cuzk.cz/}
+#' @source © ČÚZK, 2020 \url{https://vdp.cuzk.cz/}
 #'
 #' @examples
 #' library(sf)
@@ -27,6 +29,7 @@
 #'
 #' object.size(okresy("low"))
 #' object.size(okresy("high"))
+#'
 #' @export
 
 okresy <- function(resolution = "high") {
@@ -37,7 +40,7 @@ okresy <- function(resolution = "high") {
   if (resolution == "low") {
     return(okresy_low_res)
   } else {
-    result <- downloader("Okresy-R.rds")
+    result <- downloader("Okresy-R-2020-09.rds")
     result
   }
 }

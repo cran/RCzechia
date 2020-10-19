@@ -4,7 +4,9 @@
 #'
 #' Two special case scopes are defined: Praha (returning the part of Vltava in and around Prague) and Brno (returning Svitava and Svratka near and around Brno).
 #'
-#' Due to package size constraints the data are stored externally (and a working internet connection is required to use the package). Downloaded size is 1 MB.
+#' Due to package size constraints the data are stored externally (and a working internet connection is required to use the package).
+#'
+#' The data is current to January 2015. Downloaded size is 1 MB.
 #'
 #' @param scope Should the function return all rivers, or just Vltava in Prague / Svitava & Svratka in Brno?
 #'
@@ -23,7 +25,7 @@
 #' plot(st_geometry(subset(okresy(), KOD_LAU1 == "CZ0642"))) # Brno city
 #' plot(reky("Brno"), add = TRUE) # Svitava & Svratka added to Brno my city plot
 #'
-#' @source \url{https://www.arcdata.cz/produkty/geograficka-data/arccr-500}
+#' @source © ArcČR, ARCDATA PRAHA, ZÚ, ČSÚ, 2016 \url{https://www.arcdata.cz/produkty/geograficka-data/arccr-500}
 #'
 #' @export
 

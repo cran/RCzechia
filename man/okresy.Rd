@@ -16,7 +16,7 @@
 }
 }
 \source{
-\url{https://vdp.cuzk.cz/}
+© ČÚZK, 2020 \url{https://vdp.cuzk.cz/}
 }
 \usage{
 okresy(resolution = "high")
@@ -28,7 +28,9 @@ okresy(resolution = "high")
 Function returning data frame of LAU1 administrative units for the Czech Republic as \code{sf} polygons. It takes a single parameter resolution - high res (default) or low res polygons.
 }
 \details{
-Due to package size constraints the data are stored externally (and a working internet connection is required to use the package). Downloaded size of high resolution shapefile is 1 MB (so use with caution, and patience).
+Due to package size constraints the data are stored externally (and a working internet connection is required to use the package).
+
+The data is current to September 2020. Downloaded size of high resolution shapefile 1 MB.
 }
 \examples{
 library(sf)
@@ -38,4 +40,5 @@ plot(hranice, col = "white", max.plot = 1)
 
 object.size(okresy("low"))
 object.size(okresy("high"))
+
 }

@@ -15,7 +15,7 @@
 }
 }
 \source{
-\url{https://www.arcdata.cz/produkty/geograficka-data/arccr-500}
+© ArcČR, ARCDATA PRAHA, ZÚ, ČSÚ, 2016 \url{https://www.arcdata.cz/produkty/geograficka-data/arccr-500}
 }
 \usage{
 plochy()
@@ -24,5 +24,7 @@ plochy()
 Function returning data frame of water bodies of the Czech Republic as \code{sf} polygons. It takes no parameters.
 }
 \details{
-Due to package size constraints the data are stored externally (and a working internet connection is required to use the package). Downloaded size is 118.6 KB.
+Due to package size constraints the data are stored externally (and a working internet connection is required to use the package).
+
+The data is current to January 2015. Downloaded size is <1 MB.
 }

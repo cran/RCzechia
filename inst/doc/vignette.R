@@ -94,24 +94,25 @@ vzdalenost <- sf::st_distance(praha, brno) %>%
 print(vzdalenost[1])
 
 
-## ----brno-center, echo = T, eval = T, message = F, fig.width = 6, fig.height = 6----
+## ----brno-center, echo = T, eval = T, message = F, warning = F, fig.width = 6, fig.height = 6----
 library(dplyr)
 library(RCzechia)
 library(ggplot2)
 library(sf)
 
-# polygon of Brno city
-brno <- dplyr::filter(RCzechia::okresy(), KOD_LAU1 == "CZ0642")
+# all districts
+brno <- RCzechia::okresy() %>% 
+  dplyr::filter(KOD_LAU1 == "CZ0642")
 
 # calculate centroid
 pupek_brna <- brno %>%
-  st_transform(5514) %>% # planar CRS (eastings & northings)
-  st_set_agr('constant') %>%  # not strictly necessary, but avoids error message
+  sf::st_transform(5514) %>% # planar CRS (eastings & northings)
   sf::st_centroid(brno) # calculate central point of a polygon
 
 # the revgeo() function takes a sf points data frame and returns it back
 # with address data in "revgeocoded"" column
-adresa_pupku <- RCzechia::revgeo(pupek_brna)$revgeocoded
+adresa_pupku <- RCzechia::revgeo(pupek_brna) %>% 
+  pull(revgeocoded)
 
 # report results
 print(adresa_pupku)
@@ -154,29 +155,6 @@ ggplot() +
 #                color = NA)
 #  
 
-## ----union,  echo = T, eval = T, message = F----------------------------------
-library(RCzechia)
-library(ggplot2)
-library(dplyr)
-library(sf)
-
-
-poly <- RCzechia::okresy("low") %>% # Czech LAU1 regions as sf data frame
-  mutate(oddeven = ifelse(nchar(NAZ_LAU1) %% 2 == 1, "odd", "even" )) %>% # odd or even?
-  RCzechia::union_sf("oddeven") # ... et facta est lux
-
-# Structure of the "poly" object:
-head(poly)
-
-# report results
-ggplot(data = poly, aes(fill = oddeven)) +
-  geom_sf() +
-  scale_fill_viridis_d() +
-  labs(title = "Number of characters in names of Czech districts",
-       fill = "Odd or even?") +
-  theme_bw()
-
-
 ## ----ctverce, echo = T, eval = T, message = F, warning = F,fig.width = 8, fig.height = 5----
 library(RCzechia)
 library(ggplot2)
@@ -185,7 +163,7 @@ library(sf)
 
 obec <- "Humpolec" # a Czech location, as a string
 
-# geolocate centroid of a place
+# geolocate the place
 place <- RCzechia::geocode(obec) %>% 
   filter(typ == "Obec") 
 
@@ -193,7 +171,8 @@ class(place) # a spatial data frame
 
 # ID of the KFME square containg place geocoded (via spatial join)
 ctverec_id <- sf::st_join(RCzechia::KFME_grid(), 
-                          place, left = F)$ctverec
+                          place, left = FALSE) %>% # not left = inner (filtering) join 
+  pull(ctverec)
 
 print(paste0("Location found in grid cell number ", ctverec_id, "."))
 

@@ -7,7 +7,7 @@
 \code{raster} package RasterLayer.
 }
 \source{
-\url{https://www.arcdata.cz/produkty/geograficka-data/arccr-500}
+© ArcČR, ARCDATA PRAHA, ZÚ, ČSÚ, 2016 \url{https://www.arcdata.cz/produkty/geograficka-data/arccr-500}
 }
 \usage{
 vyskopis(format = "rayshaded")
@@ -23,7 +23,9 @@ The function returns a raster file of either actual relief (values are meters ab
 
 The raster is 5084 by 3403 cells, meaning each pixel is about 90 × 90 meters. It works the best at level of country or regions, at the level of a city or lower it may be somewhat grainy.
 
-Due to package size constraints both versions are stored externally (and a working internet connection is required to use the package). Downloaded size of the rayshaded raster is 8.4 MB, actual raster is 31.4 MB.
+Due to package size constraints both versions are stored externally (and a working internet connection is required to use the package).
+
+The data is current to September 2016. Downloaded size of the rayshaded raster is 8.4 MB, actual raster is 31.4 MB.
 }
 \examples{
 
@@ -32,4 +34,5 @@ library(raster)
 relief <- vyskopis("rayshaded")
 
 plot(relief, col = gray.colors(16))
+
 }
