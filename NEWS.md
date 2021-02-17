@@ -1,6 +1,18 @@
+## version 1.6.6
+
+  - volebni_okrsky(), senat_obvody() and zip_codes() functions added, based on helpful suggestions from Jakub Komárek
+ 
+  - resolves invalid geometries of okresy, orp_polygony and chr_uzemi 
+  
+  - resolved inconsistencies in geometries of okresy Brno město & Brno venkov
+  
+  - updated vignette ({czso} replaces downloaded csv files; viz of Senát added)
+  
+  - unit tests adjusted to decrease load on CRAN servers
+
 ## version 1.6.3
 
-  - this version resolves issues with version 1.6.2 on systems with PROJ under 6.0.0
+  - resolves issues with version 1.6.2 on systems with PROJ under 6.0.0
 
 ## version 1.6.2
 

@@ -16,7 +16,7 @@ For examples of RCzechia in action please see the package vignette:
 * [Terrain of the Czech Republic](https://CRAN.R-project.org/package=RCzechia/vignettes/vignette.html#terrain-of-the-czech-republic)
 
 
-The administrative area polygons (except for city parts) are based on the [RÚIAN register](https://cs.wikipedia.org/wiki/Registr_%C3%BAzemn%C3%AD_identifikace,_adres_a_nemovitost%C3%AD); the natural objects (and city parts) are based on ArcČR 500 (https://www.arcdata.cz/produkty/geograficka-data/arccr-500) with some adjustments:  
+The administrative area polygons are based on the [RÚIAN register](https://cs.wikipedia.org/wiki/Registr_%C3%BAzemn%C3%AD_identifikace,_adres_a_nemovitost%C3%AD); the natural objects are based on ArcČR 500 (https://www.arcdata.cz/produkty/geograficka-data/arccr-500) with some adjustments:  
 
  * the encoding was adjusted to handle Czech accents correctly in R  
  * coordinate reference system was changed from a local CRS ([S-JSTK](https://epsg.io/5513-1623)) to global WGS84 ([EPSG:4326](https://epsg.io/4326))   
@@ -37,9 +37,12 @@ The package is on CRAN (as of March 2018) so to get a stable version simply run:
 ```r 
 install.packages("RCzechia")
 ```
-You can also get the latest development version by running `remotes::install_github("jlacko/RCzechia")` and the last version built on [`sp`](https://github.com/edzer/sp) instead of [`sf`](https://github.com/r-spatial/sf) package by running  `remotes::install_github("jlacko/RCzechia", ref = "v0.1.4")`. 
+You can also get the latest development version by running `remotes::install_github("jlacko/RCzechia")`
 
 ### The following spatial objects are included:  
+
+administrative:
+
 * **republika**: borders of the Czech Republic
 * **kraje**: 14 regions of the Czech Republic + Prague.  
 Key is KOD_CZNUTS3 (CZ NUTS3 code).
@@ -53,6 +56,12 @@ Key is KOD_OBEC, also contained are KOD_ORP (code of municipality with extended 
 Key is again KOD_OBEC.
 * **casti**: primarily 57 city parts of Prague, but also of other cities with defined parts (Brno, Ostrava..).  
 Key is KOD.
+* **senat_obvody**: 81 senate districts (volební obvody senátu)
+* **volebni_okrsky**: 14.761 general election districts (volební okrsky)
+* **zip_codes**: 2.671 ZIP code areas (PSČ)
+
+natural:
+
 * **reky**: streams and rivers
 * **plochy**: stillwaters (lakes and ponds).
 * **silnice**: roads (highways, speedways etc.)
@@ -61,6 +70,7 @@ Key is KOD.
 * **lesy**: woodland areas (more than 30 ha in area)
 * **KFME_grid**: KFME grid cells (faunistické čtverce)
 * **vyskopis**: terrain of the Czech republic as a {raster} package object
+
 
 All objects are implemented as functions returning data frames, so must be followed by brackets (i.e. `hranice <- republika()`).
 
