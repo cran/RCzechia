@@ -1,3 +1,7 @@
+## version 1.6.7
+
+ - internal improvements in handling of (temporarily) unavailable internet resources
+
 ## version 1.6.6
 
   - volebni_okrsky(), senat_obvody() and zip_codes() functions added, based on helpful suggestions from Jakub Komárek

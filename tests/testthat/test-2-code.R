@@ -13,12 +13,17 @@ test_that("geocode", {
   expect_error(geocode()) # čekám chybu - není cíl
 
   Sys.setenv("NETWORK_UP" = FALSE)
-  expect_message(geocode(dos_sochoros[1]), "No internet connection.") # není síť
+  expect_message(geocode(dos_sochoros[1]), "internet") # není síť
   Sys.setenv("NETWORK_UP" = TRUE)
 
   Sys.setenv("CUZK_UP" = FALSE)
-  expect_message(geocode(dos_sochoros[1]), "Error in connection.") # API down
+  expect_message(geocode(dos_sochoros[1]), "API") # API down
   Sys.setenv("CUZK_UP" = TRUE)
+
+  expect_error(geocode(), "missing") # adresa musí byť
+
+  expect_error(geocode(NA), "NAs") # NA není legitimní vstup / konvertoval by se na "NA"
+
 
   # vrací se sf objekt
   expect_s3_class(geocode(dos_sochoros[1]), "sf") # vrací se class sf
@@ -67,11 +72,11 @@ test_that("revgeo", {
   expect_error(revgeo(kraje())) # čekám chybu - nejsou body ale polygony
 
   Sys.setenv("NETWORK_UP" = FALSE)
-  expect_message(revgeo(sochor_wgs), "No internet connection.") # není síť
+  expect_message(revgeo(sochor_wgs), "internet") # není síť
   Sys.setenv("NETWORK_UP" = TRUE)
 
   Sys.setenv("CUZK_UP" = FALSE)
-  expect_message(revgeo(sochor_wgs), "Error in connection.") # API down
+  expect_message(revgeo(sochor_wgs), "API") # API down
   Sys.setenv("CUZK_UP" = TRUE)
   # vrací se sf objekt
   expect_s3_class(revgeo(sochor_wgs), "sf") # vrací se class sf
@@ -87,4 +92,15 @@ test_that("revgeo", {
 
   # platný sf objekt, ale out of scope českého katastru
   expect_equal(revgeo(amerika)$revgeocoded %>% is.na() %>% unique(), TRUE) # vrací se pouze NA ...
+})
+
+
+test_that("očekávané chyby", {
+
+  expect_false(ok_to_proceed("http://httpbin.org/status/404")) # rozbitý zcela
+  expect_false(ok_to_proceed("http://httpbin.org/status/503")) # server down
+
+  expect_message(ok_to_proceed("http://httpbin.org/status/404"), "broken") # rozbitý zcela
+  expect_message(ok_to_proceed("http://httpbin.org/status/503"), "broken") # server down
+
 })
