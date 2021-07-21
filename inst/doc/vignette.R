@@ -38,7 +38,7 @@ borders <- RCzechia::republika("low")
 rivers <- subset(RCzechia::reky(), Major == T)
 
 mista <- data.frame(misto =  c("Kramářova vila", 
-                               "Arcibiskupské zahrady v Kromeříži", 
+                               "Arcibiskupské zahrady v Kroměříži", 
                                "Hrad Bečov nad Teplou"),
                     adresa = c("Gogolova 212, Praha 1",
                                "Sněmovní náměstí 1, Kroměříž",
@@ -201,7 +201,7 @@ library(dplyr)
 library(rvest)
 
 # official result of elections from Czech Statistical Office
-vysledky <- "https://www.volby.cz/pls/senat/se1111?xjazyk=CZ&xdatum=20201002&xv=7&xt=2" %>% 
+vysledky <- "https://web.archive.org/web/20210719204451/https://www.volby.cz/pls/senat/se1111?xjazyk=CZ&xdatum=20201002&xv=7&xt=2" %>% 
   xml2::read_html() %>%  # because rvest::html is deprecated
   html_nodes(xpath = "//*[@id=\"se1111_t1\"]") %>%  # get the table by its xpath
   html_table(fill = T) %>% 
