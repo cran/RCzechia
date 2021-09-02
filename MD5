@@ -1,7 +1,7 @@
-89c8a3171e05b0f33ab48855fce51cc7 *DESCRIPTION
+c79b67eeeddda31f65721787b2c1b893 *DESCRIPTION
 7a69497bc5b1806a5d61a816f197ca79 *LICENSE
 61ee887c2505e4e17d026b289bcdd044 *NAMESPACE
-fbbe03f95bbfd4fe5d337854089119cb *NEWS.md
+45aa28690c4395548bbc8b34be105984 *NEWS.md
 01a8a771f432b23dfbe0fbe5078fc9db *R/KFME_grid.R
 01fc52c0e722165e84fd1e41abe4b0c1 *R/RCzechia.R
 d1c4db173734cbb486d833c3824ab45e *R/casti.R
@@ -16,7 +16,7 @@ ee51ca834a23ce718995078171a83800 *R/ok_to_proceed.R
 ca9bc0229909ae6e7adafd49b11975f1 *R/okresy.R
 f8a26b56e12e1b467f0741b311971b0b *R/orp_polygony.R
 6532517894ae668de3dff38c7ec5c980 *R/plochy.R
-f1a24d1206a8e4256f77b307ee2b00c2 *R/reky.R
+b008e25cdff24c2ff5c8e39e4abecb99 *R/reky.R
 f3777f3fe3f0f13fc8e7b1b93d3d41b3 *R/republika.R
 9afbb902e0c6c9dfb10fb6c66cc9e0d8 *R/revgeo.R
 0e2ddaddb73af03597afe252a74e64d0 *R/senat_obvody.R
@@ -27,10 +27,10 @@ f3777f3fe3f0f13fc8e7b1b93d3d41b3 *R/republika.R
 ef34587e53417e78f3e1285c455007a4 *R/zeleznice.R
 6b09da3281e6a5fdd0c45881f9ed8745 *R/zip_codes.R
 0ff5a40e82d9bbd81ae9d7637124bc2d *README.md
-3e8f157f0a8492ab4c98cb647d376507 *build/vignette.rds
+43422a95f3e7c63ff50b661aebf98e3a *build/vignette.rds
 5c2dfea3abd68582de8d55b13596337a *inst/doc/vignette.R
 86216c1d7b5fba5006b89c56f644edae *inst/doc/vignette.Rmd
-e987b9c9665c19f88f79d82c3bf2dbbf *inst/doc/vignette.html
+4e5e33691e3f599b6da5f05470fcd8b9 *inst/doc/vignette.html
 ac05558e62b157cea65d87f4d6431345 *man/KFME_grid.Rd
 ac2fc569388051f8d4ef7de5b8620c59 *man/RCzechia-package.Rd
 25240305e65b07dcdb31fd92f5550826 *man/casti.Rd
@@ -45,7 +45,7 @@ b6c10952c7725cd022be0253fafbaee6 *man/obce_polygony.Rd
 c35c9d47e54606aeefcbeeb269bf3924 *man/okresy.Rd
 05940dd98c83c41e376efbea595251d8 *man/orp_polygony.Rd
 c104c53b2ba5f37a483c7c2371738892 *man/plochy.Rd
-4dc6854a04dbedc9000bca63d0e75c93 *man/reky.Rd
+ec492b984007ea2efef9557d2da3de6d *man/reky.Rd
 f8f261e0fc4c8f700746b694dc7f0d7b *man/republika.Rd
 4ce1c52e9796b01a1e9e6cc93ae6ba32 *man/revgeo.Rd
 78a4a00b6c78414deb0cf7bd72b7a55a *man/senat_obvody.Rd
@@ -66,7 +66,7 @@ b8c789952eada214b290c39dd922cc16 *tests/testthat/test-1-orp.R
 06f0b04f3e558e719ac26e52404de5a4 *tests/testthat/test-1-relief.R
 7401c586db1986cfa83bf0351d215fbf *tests/testthat/test-1-republika.R
 eb606afdbee8301176e294d04c7ee524 *tests/testthat/test-1-transport.R
-bef787050beaf9727fffb5332e6b3b91 *tests/testthat/test-1-vodstvo.R
+70eacee6a2d5a1b7a19af4585cf17d69 *tests/testthat/test-1-vodstvo.R
 df3f52ce6b23453ada486afffb7c1dfb *tests/testthat/test-1-volby.R
 205d45c2ef40cdb5ab8cd3c47fb346ca *tests/testthat/test-1-zip-codes.R
 d77efe61ef693cb6442b95c0d2a00647 *tests/testthat/test-2-code.R
