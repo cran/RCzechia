@@ -10,6 +10,9 @@ revgeo(coords)
 \item{coords}{coordinates to be reverse geocoded; expected as \code{sf} data
 frame of spatial points}
 }
+\value{
+\code{sf} data frame as input, with column revgeocoded added (or overwritten)
+}
 \description{
 This function connects to Czech State Administration of Land Surveying and
 Cadastre (\url{https://www.cuzk.cz/en}) API to reversely geocode an address.

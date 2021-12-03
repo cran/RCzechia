@@ -1,3 +1,7 @@
+## version 1.9.1
+
+ - resubmission after archival due to issues with macOS 12 (Monterey)
+
 ## version 1.8.3
 
  - the reky (rivers) function gained optional parameter resolution, allowing usage of smoother low res object
