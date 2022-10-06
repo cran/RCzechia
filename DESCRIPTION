@@ -1,9 +1,11 @@
 Package: RCzechia
 Type: Package
 Title: Spatial Objects of the Czech Republic
-Version: 1.9.2
-Date: 2022-05-14
-Author: Jindra Lacko
+Version: 1.9.4
+Date: 2022-10-06
+Authors@R: 
+    person("Jindra", "Lacko", , "jindra.lacko@gmail.com", role = c("aut", "cre"),
+    comment = c(ORCID = "0000-0002-0375-5156"))
 Maintainer: Jindra Lacko <jindra.lacko@gmail.com>
 Description: Administrative regions and other spatial objects of the Czech Republic.
 URL: https://github.com/jlacko/RCzechia
@@ -16,9 +18,10 @@ Suggests: raster, readxl, units, ggplot2, stringr, rvest, xml2, scales,
         knitr, testthat, roxygen2, devtools, rmarkdown, dplyr, lwgeom,
         s2, covr
 SystemRequirements: GDAL (>= 2.2.3), GEOS (>= 3.6.2), PROJ (>= 4.9.3)
-RoxygenNote: 7.2.0
+RoxygenNote: 7.2.1
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2022-05-14 20:21:41 UTC; jindra
+Packaged: 2022-10-06 20:41:26 UTC; jindra
+Author: Jindra Lacko [aut, cre] (<https://orcid.org/0000-0002-0375-5156>)
 Repository: CRAN
-Date/Publication: 2022-05-14 20:30:02 UTC
+Date/Publication: 2022-10-06 20:50:06 UTC
