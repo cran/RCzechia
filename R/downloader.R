@@ -5,7 +5,6 @@
 
 .downloader <- function(file) {
   network <- as.logical(Sys.getenv("NETWORK_UP", unset = TRUE)) # dummy variable to allow testing of network
-  aws <- as.logical(Sys.getenv("AWS_UP", unset = TRUE)) # dummy variable to allow testing of network
 
   remote_path <- "https://rczechia.jla-data.net/" # remote archive
 
@@ -20,18 +19,18 @@
       return(NULL)
     }
 
-    if (!.ok_to_proceed(remote_file) | !aws) { # AWS bucket down
-      message("Data source broken.")
-      return(NULL)
-    }
-
     # proceed to download via curl
     message("RCzechia: downloading remote dataset.")
     curl::curl_download(url = remote_file, destfile = local_file, quiet = T)
    } # /if - local file exists
 
-  local_df <- readRDS(local_file)
+  # everything except rasters
+  if(tools::file_ext(local_file) == "rds") local_df <- readRDS(local_file)
 
+  # rasters, and rasters only
+  if(tools::file_ext(local_file) == "tif") local_df <- terra::rast(local_file)
+
+  # serve the result back
   local_df
 
 } # /function
