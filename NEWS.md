@@ -1,3 +1,12 @@
+
+## version 1.11 (2023-03-03)
+
+ - MIT license formalized
+ 
+ - Code of Conduct formalized
+ 
+ - CITATION file updated
+
 ## version 1.10.1 (2023-01-20)
 
  - the election districts - volebni_okrsky() - are updated to version as of January 2023 presidential elections

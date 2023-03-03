@@ -7,6 +7,7 @@
 [![Downloads-weekly](http://cranlogs.r-pkg.org/badges/last-week/RCzechia?color=brightgreen)](https://cran.r-project.org/package=RCzechia)
 [![Downloads-total](http://cranlogs.r-pkg.org/badges/grand-total/RCzechia?color=brightgreen)](https://cran.r-project.org/package=RCzechia)
 [![DOI](https://zenodo.org/badge/97862932.svg)](https://zenodo.org/badge/latestdoi/97862932)
+[![DOI](https://joss.theoj.org/papers/10.21105/joss.05082/status.svg)](https://doi.org/10.21105/joss.05082)
 <!-- badges: end -->
 
 This project downloads a set of shapefiles relevant to the Czech Republic. It was inspired by the popular [`tigris`](https://github.com/walkerke/tigris) package for US datasets.  
@@ -77,8 +78,14 @@ All objects are implemented as functions returning data frames, so must be follo
 * **geocode**: interfaces to geocoding API of [ČÚZK](https://cuzk.cz/en).
 * **revgeo**: interfaces to reverse geocoding API of [ČÚZK](https://cuzk.cz/en).
 
-### A call for action
+## Call for Action
 
 The project is actively maintained, and ideas & suggestions to improve the package are greatly welcome. Should you feel more at ease with old fashioned email than the GitHub ticketing system - do drop me a line.
 
 But raising an issue is preferable, as I am human and I forget; GitHub does not suffer from such a failing, and will keep on reminding me till the sun and moon are darkened, and the stars no longer shine.
+
+More detailed information can be found in the [CONTRIBUTING](https://github.com/jlacko/RCzechia/blob/master/CONTRIBUTING.md) document.
+
+## Code of Conduct
+  
+Please note that the RCzechia project is released with a [Contributor Code of Conduct](https://github.com/jlacko/RCzechia/blob/master/CODE_OF_CONDUCT.md). By contributing to this project, you agree to abide by its terms.
