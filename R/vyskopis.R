@@ -1,12 +1,12 @@
 #' Vyskopis
 #'
-#' Terrain of the Czech Republic as a {terra} package object.
+#' Terrain of the Czech Republic as a `terra` package object.
 #'
-#' The function returns a raster file of either actual terrain (values are meters above sea level) or rayshaded relief..
+#' The function returns a raster file of either actual terrain (values are meters above sea level) or rayshaded relief.
 #'
 #' The raster is created from EU DEM 1.1 file by Copernicus Land Monitoring service. The original file has pixel resolution 25×25 meters, which is too detailed for purposes of the package and was downsampled by factor of 4.
 #'
-#' The extent of the raster file is bouding box of the Czech Republic; this is a change to prior versions in order to better facilitate use of the raster in natural sciences context. To preserve compatibility optional argument `cropped` has been created, defaulting to `TRUE` (i.e. behaviour before v1.10.0).
+#' The extent of the raster file is bounding box of the Czech Republic; this is a change to prior versions in order to better facilitate use of the raster in natural sciences context. To preserve compatibility optional argument `cropped` has been created, defaulting to `TRUE` (i.e. behavior before v1.10.0).
 #'
 #' Due to package size constraints both versions are stored externally (and a working internet connection is required to use the package).
 #'
@@ -14,11 +14,11 @@
 #'
 #' @param format Should the function return actual terrain (meters above sea level) or shaded relief (rayshaded). Allowed values are "actual" and "rayshaded".
 #'
-#' @param cropped Should the raster provide data over Czech Republic's bounding box (cropped = FALSE) or just actual borders (cropped = TRUE). Defaults to TRUE to preserve compatiblity with earlier versions.
+#' @param cropped Should the raster provide data over Czech Republic's bounding box (cropped = FALSE) or just actual borders (cropped = TRUE). Defaults to TRUE to preserve compatibility with earlier versions.
 #'
 #' @return `terra` package SpatRaster
 #'
-#' @source Copernicus Land Monitoring service, with funding by the European Union. <https://land.copernicus.eu/imagery-in-situ/eu-dem>
+#' @source Copernicus Land Monitoring service, with funding by the European Union. <https://land.copernicus.eu/en/products/products-that-are-no-longer-disseminated-on-the-clms-website>
 #'
 #' @examples
 #' \donttest{
