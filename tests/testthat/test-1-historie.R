@@ -55,9 +55,13 @@ test_that("historie platí", {
 
     expect_equal(nrow(historie(doba)), unname(entities[doba]))
 
+    expect_equal(sum(duplicated(colnames(historie(doba)))), 0) # sloupce bez duplicit v názvech
+
     expect_equal(st_crs(historie(doba))$input, "EPSG:4326")
 
     expect_true(all(st_is_valid(historie(doba))))
+
+    expect_true(all(st_geometry_type(historie(doba)) %in% c("POLYGON", "MULTIPOLYGON")))
 
     # sloupece obsahují geometrii (ne geom nebo x)
     expect_true("geometry" %in% colnames(historie(doba)))

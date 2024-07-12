@@ -8,12 +8,21 @@
 #' To save time (and bandwidth) the downloaded objects are saved locally in
 #' `tempdir` directory when requested, and downloaded at most once *per R
 #' session*; out of respect to CRAN Repository Policy a more permanent caching
-#' on user's side is not attempted.
+#' on user's side is not attempted by default – but it can be actively introduced
+#' by the user either via a \code{RCzechia::set_home()} call or by setting the
+#' value of `RCZECHIA_HOME` environment variable directly, either using a
+#' \code{Sys.setenv()} call or via editing the \code{.Renviron} file.
 #'
 #' This means that:
 #' \itemize{
 #'   \item a working internet connection is required to use the full resolution objects
-#'   \item all objects need to be called with (possibly empty) braces
+#'   \item the first call to an object in a R session will download
+#'   the object from the internet (and thus take some time)
+#'   \item the user an has an option to create a permanent local cache of the objects
+#'   by setting the `RCZECHIA_HOME` environment variable in her  \code{.Renviron} file,
+#'   gaining a faster access to the objects in the future and sidestepping the
+#'   requirement of a working internet connection. Out of respect to CRAN
+#'   Repository Policy this is not default behavior.
 #' }
 #'
 #' For the most frequently used objects - **republika**, **kraje** and
@@ -54,6 +63,10 @@
 #'  \item *volebni_okrsky* - 14.733 general election districts
 #'
 #'  source:  [RÚIAN / ČÚZK](https://www.cuzk.cz/ruian/RUIAN.aspx), high res object: 75.8 MB, low res object:  5.0 MB
+#'  \item *katastry* - 13.076 cadastral areas of the Czech Republic
+#'
+#'  source: [RÚIAN / ČÚZK](https://www.cuzk.cz/ruian/RUIAN.aspx), high res object: 26.1 MB, no low res version
+#'
 #'  \item *zip_codes* - 2.671 ZIP code areas
 #'
 #'  source:  [Czech Statistical Office](https://www.czso.cz/csu/czso/podminky_pro_vyuzivani_a_dalsi_zverejnovani_statistickych_udaju_csu), high res object: 45.4 MB, low res object: 2.1 MB
@@ -98,13 +111,12 @@
 #'   \item *geocode* - geocoding (from address to coordinates)
 #'   \item *revgeo* - reverse geocoding (from coordinates to address)
 #' }
-#'
-#' @docType package
-#' @name RCzechia-package
+#' @references
+#' Lacko J (2023). “RCzechia: Spatial Objects of the Czech Republic.” Journal of Open Source Software, 8(83). doi:10.21105/joss.05082, https://joss.theoj.org/papers/10.21105/joss.05082.
 #'
 #' @import sf
 #' @importFrom httr http_error
 #' @importFrom curl curl_download
 #' @importFrom magrittr %>%
 
-NULL
+"_PACKAGE"

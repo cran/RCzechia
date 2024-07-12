@@ -1,3 +1,19 @@
+## version 1.12.2 (2024-07-07)
+
+ - katastry function added to serve cadastral areas / katastrální území
+ 
+ - admin areas based on June 2024 rather than June 2021 RUIAN dataset
+
+ - test coverage & (minor) documentation update
+
+## version 1.12.1 (2024-03-04)
+
+ - documentation updated in line with current roxygen2 and pkgdown standards
+ 
+ - github actions updated to current standards
+ 
+ - minor update of the vignette / removing defunct Stamen Toner basemap
+
 ## version 1.12.0 (2023-10-29)
 
  - [!] introduced an option for persistent local caching via setting the `RCZECHIA_HOME` environment variable; this has to be set manually - either directly or via a set_home() function call
