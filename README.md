@@ -1,11 +1,11 @@
 # RCzechia    
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/jlacko/RCzechia/workflows/R-CMD-check/badge.svg)](https://github.com/jlacko/RCzechia/actions/workflows/R-CMD-check.yaml)
-[![CRAN](http://www.r-pkg.org/badges/version/RCzechia)](https://cran.r-project.org/package=RCzechia)
+[![CRAN](https://www.r-pkg.org/badges/version/RCzechia)](https://cran.r-project.org/package=RCzechia)
 [![CRAN-checks](https://badges.cranchecks.info/worst/RCzechia.svg)](https://cran.r-project.org/web/checks/check_results_RCzechia.html)
 [![Codecov test coverage](https://codecov.io/gh/jlacko/RCzechia/branch/master/graph/badge.svg)](https://app.codecov.io/gh/jlacko/RCzechia?branch=master)
-[![Downloads-weekly](http://cranlogs.r-pkg.org/badges/last-week/RCzechia?color=brightgreen)](https://cran.r-project.org/package=RCzechia)
-[![Downloads-total](http://cranlogs.r-pkg.org/badges/grand-total/RCzechia?color=brightgreen)](https://cran.r-project.org/package=RCzechia)
+[![Downloads-weekly](https://cranlogs.r-pkg.org/badges/last-week/RCzechia?color=brightgreen)](https://cran.r-project.org/package=RCzechia)
+[![Downloads-total](https://cranlogs.r-pkg.org/badges/grand-total/RCzechia?color=brightgreen)](https://cran.r-project.org/package=RCzechia)
 [![DOI](https://zenodo.org/badge/97862932.svg)](https://zenodo.org/badge/latestdoi/97862932)
 [![DOI](https://joss.theoj.org/papers/10.21105/joss.05082/status.svg)](https://doi.org/10.21105/joss.05082)
 <!-- badges: end -->
@@ -78,8 +78,8 @@ natural:
 All objects are implemented as functions returning data frames, so must be followed by brackets (i.e. `hranice <- republika()`).
 
 ### In addition a number of utility functions is provided:  
-* **geocode**: interfaces to geocoding API of [ČÚZK](https://cuzk.cz/en).
-* **revgeo**: interfaces to reverse geocoding API of [ČÚZK](https://cuzk.cz/en).
+* **geocode**: interfaces to geocoding API of [ČÚZK](https://cuzk.gov.cz/en).
+* **revgeo**: interfaces to reverse geocoding API of [ČÚZK](https://cuzk.gov.cz/en).
 
 ## Call for Action
 
