@@ -9,7 +9,7 @@
 #' The data is current to June 2024. Downloaded size is 26.1 MB.
 #'
 #'
-#' @return `sf` data frame with 142 rows of 4 variables + geometry
+#' @return `sf` data frame with 13076 rows of 5 variables + geometry
 #'
 #' \describe{
 #'   \item{KOD}{Code of the cadastral area / kód katastrálního území}
@@ -27,12 +27,12 @@
 #' library(sf)
 #'
 #' # which cadastral area of Prague is the smallest?
-#' praha <- RCzechia::katastry() |>
+#' praha <- RCzechia::katastry() %>%
 #'    subset(NAZ_OBEC == "Praha")
 #'
 #' smallest <- which.min(sf::st_area(praha))
 #'
-#' plot(st_geometry(RCzechia::obce_polygony() |>
+#' plot(st_geometry(RCzechia::obce_polygony() %>%
 #'    subset(NAZ_OBEC == "Praha")))
 #'
 #' plot(st_geometry(RCzechia::reky("Praha")), col = "navyblue", add = TRUE)
